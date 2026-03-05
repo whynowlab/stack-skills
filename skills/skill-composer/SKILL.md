@@ -9,9 +9,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep, Bash
 
 Modular workflow builder that chains skills into compound pipelines.
 
-> Adapted from: fewweekslater (lemos999), 기본설정 에드온 Architecture
 > Core principle: Feature Layer + Persona Layer separation, modular addon composition
-> Claude Code skill conversion: DD (@thestack_ai)
 
 ## Rules (Absolute)
 

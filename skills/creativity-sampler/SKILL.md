@@ -8,9 +8,6 @@ argument-hint: "[decision or question to explore]"
 
 Probability-weighted option generator that fights typicality bias and surfaces unconventional alternatives.
 
-> Adapted from: fewweekslater (lemos999), Verbalized Sampling Orchestrator (창의성 5단계)
-> Core principle: Distribution-First — counter RLHF's tendency to always pick the "safe" answer
-> Claude Code skill conversion: DD (@thestack_ai)
 
 ## Rules (Absolute)
 

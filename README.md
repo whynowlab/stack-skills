@@ -5,8 +5,7 @@
 7 meta-cognitive skills that upgrade how your AI *thinks* — not just what it codes. Research deeper, decide smarter, review harder, learn faster.
 
 > Built for [Claude Code](https://claude.com/claude-code) | Compatible with [Agent Skills](https://agentskills.io) open standard
-> Adapted from the [Integrated Prompt Archive v0304](https://github.com/lemos999) by fewweekslater
-> Skill conversion by DD ([@thestack_ai](https://github.com/whynowlab))
+> Created by [@thestack_ai](https://github.com/whynowlab)
 
 ---
 
@@ -130,25 +129,6 @@ cp -r stack-skills/skills/cross-verified-research .claude/skills/
 | Codex CLI | Compatible (Agent Skills standard) |
 
 ---
-
-## Credits
-
-These skills are adapted from the **Integrated Prompt Archive v0304** by **fewweekslater** ([GitHub: lemos999](https://github.com/lemos999)).
-
-Original prompts that were transformed:
-
-| Skill | Original Source |
-|:------|:----------------|
-| cross-verified-research | Search Mode (REALITY_SYNC_KERNEL_V4) + Loti ASE/DRAP |
-| creativity-sampler | Verbalized Sampling Orchestrator (5-Stage Creativity) |
-| adversarial-review | Ailey (Coach) + Bailey (Critic) + Logic-Persona |
-| skill-composer | Addon Architecture (Feature + Persona Layer) |
-| persona-architect | Persona Generator (5 archetypes) |
-| deep-dive-analyzer | Loti Codex Engine + Microscopic Analyst |
-| tiered-test-generator | Problem Bank + Grading Engine + Diagnostic Report |
-
-Original archive published on DC Inside Singularity Gallery.
-Search Mode is licensed under MIT.
 
 ## License
 

@@ -5,8 +5,7 @@
 코드를 작성하는 것이 아니라, AI가 *생각하는 방식*을 업그레이드하는 7개 메타-인지 스킬. 더 깊이 조사하고, 더 날카롭게 결정하고, 더 엄격하게 검증하세요.
 
 > [Claude Code](https://claude.com/claude-code) 전용 | [Agent Skills](https://agentskills.io) 오픈 표준 호환
-> 원본: [통합 프롬프트 아카이브 v0304](https://github.com/lemos999) by fewweekslater (DC Inside 특이점이온다 갤러리)
-> 스킬 전환: DD ([@thestack_ai](https://github.com/whynowlab))
+> Created by [@thestack_ai](https://github.com/whynowlab)
 
 ---
 
@@ -93,23 +92,6 @@ cp -r stack-skills/skills/* ~/.claude/skills/
 ```
 
 ---
-
-## 원본 크레딧
-
-**통합 프롬프트 아카이브 v0304** by **fewweekslater** ([GitHub: lemos999](https://github.com/lemos999))에서 변환되었습니다.
-
-| 스킬 | 원본 |
-|:------|:------|
-| cross-verified-research | Search Mode (REALITY_SYNC_KERNEL_V4) + Loti |
-| creativity-sampler | 창의성 5단계 (Verbalized Sampling) |
-| adversarial-review | 에일리 (코치) + 베일리 (비평가) + 논리 재판관 |
-| skill-composer | 기본설정 에드온 모듈 아키텍처 |
-| persona-architect | 페르소나 생성기 (5종 아키타입) |
-| deep-dive-analyzer | Loti 코덱스 엔진 + 마이크로 분석가 |
-| tiered-test-generator | 문제은행 + 채점 엔진 + 진단 리포트 |
-
-원본은 DC Inside 특이점이온다 갤러리에서 공유되었습니다.
-Search Mode는 MIT 라이선스입니다.
 
 ---
 

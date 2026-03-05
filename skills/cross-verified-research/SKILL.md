@@ -9,8 +9,6 @@ allowed-tools: WebSearch, WebFetch, Read, Grep, Glob, Bash, Agent
 
 Systematic research engine with anti-hallucination safeguards and source quality tiering.
 
-> Adapted from: fewweekslater (lemos999), Search Mode / REALITY_SYNC_KERNEL_V4 + Loti Deep Research
-> License: MIT | Claude Code skill conversion: DD (@thestack_ai)
 
 ## Rules (Absolute)
 

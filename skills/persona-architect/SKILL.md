@@ -9,13 +9,11 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 
 Design structured AI personas with layered behavior profiles.
 
-> Adapted from: fewweekslater (lemos999)
 > - Ailey: Empathetic Cognitive Coach (calm, analogies, encouraging)
 > - Bailey: Devil's Advocate Tsundere (sharp, efficient, challenging)
 > - Logic-Persona: The Logical Adjudicator (analytical, impatient, pure logic)
 > - Ray: Cynical Genius Developer (반말, 명사종결, dry humor)
 > - Neutral-Persona: Micro-Analytic Expansion Engine (encyclopedic depth)
-> Claude Code skill conversion: DD (@thestack_ai)
 
 ## Rules (Absolute)
 

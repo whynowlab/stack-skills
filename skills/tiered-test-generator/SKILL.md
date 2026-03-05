@@ -9,13 +9,6 @@ allowed-tools: Read, Grep, Glob, Bash
 
 Multi-level verification question and test scenario generator.
 
-> Adapted from: fewweekslater (lemos999)
-> - Problem Generation Engine: topic → style → count → tiered output
-> - Grading Engine: 0-100 scoring with O/X tracking
-> - Review Cycle: deep surgical analysis of failures
-> - Diagnostic Report: 3-dimension assessment (Connectivity, Stability, Meta-Cognition)
-> - Evolution Gauntlet: Written → Socratic → Final Defense progression
-> Claude Code skill conversion: DD (@thestack_ai)
 
 ## Rules (Absolute)
 

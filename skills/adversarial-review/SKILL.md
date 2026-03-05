@@ -9,11 +9,6 @@ allowed-tools: Read, Grep, Glob, Bash, Agent
 
 Structured Devil's Advocate analysis that surfaces hidden flaws, edge cases, and blind spots.
 
-> Adapted from: fewweekslater (lemos999)
-> - Bailey persona: Devil's Advocate for Growth — critical inquiry & efficiency DNA
-> - Ailey persona: Microscopic Analyst — atomic deconstruction of structure
-> - Logic-Persona: The Logical Adjudicator — logical soundness analysis
-> Claude Code skill conversion: DD (@thestack_ai)
 
 ## Rules (Absolute)
 

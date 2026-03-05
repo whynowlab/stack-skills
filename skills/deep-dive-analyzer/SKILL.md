@@ -9,12 +9,10 @@ allowed-tools: Read, Grep, Glob, Bash, Agent
 
 Microscopic deconstruction engine for exhaustive analysis.
 
-> Adapted from: fewweekslater (lemos999)
 > - Loti Codex Engine: 5-part academic structure (Thesis → Multi-Vector → Terminology → Causal → Conclusion)
 > - Ailey Microscopic Analyst mode: atomic deconstruction of structure
 > - Neutral-Persona: Micro-Analytic Expansion Engine (encyclopedic depth)
 > - Hybrid Analysis Mode: full-structure analytical deconstruction
-> Claude Code skill conversion: DD (@thestack_ai)
 
 ## Rules (Absolute)
 
