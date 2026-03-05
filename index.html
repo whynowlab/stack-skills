@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="7 meta-cognitive skills that upgrade how your AI thinks — not just what it codes.">
+<meta property="og:title" content="Stack Skills — Stack your AI's thinking ability">
+<meta property="og:description" content="7 meta-cognitive skills that upgrade how your AI thinks — not just what it codes.">
+<meta property="og:type" content="website">
+<title>Stack Skills — Stack your AI's thinking ability</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ===== RESET & BASE ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #21262d;
+    --border: #30363d;
+    --border-bright: #484f58;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --text-subtle: #6e7681;
+    --accent: #58a6ff;
+    --accent-dim: #1f6feb;
+    --green: #3fb950;
+    --green-dim: #238636;
+    --red: #f85149;
+    --yellow: #d29922;
+    --gold: #e3b341;
+    --purple: #bc8cff;
+    --orange: #ffa657;
+    --cyan: #39d353;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    --font-display: 'Syne', sans-serif;
+    --radius: 8px;
+    --radius-lg: 12px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-display);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ===== SCROLLBAR ===== */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 3px; }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(13,17,23,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav-logo .prompt { color: var(--green); }
+  .nav-logo .cursor {
+    display: inline-block;
+    width: 8px; height: 14px;
+    background: var(--green);
+    animation: blink 1.2s step-end infinite;
+    vertical-align: middle;
+  }
+
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-cta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 6px 14px;
+    background: var(--green-dim);
+    color: var(--text);
+    border: 1px solid var(--green);
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .nav-cta:hover { background: var(--green); color: #000; }
+
+  /* ===== SECTIONS ===== */
+  section { padding: 100px 24px; }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  /* ===== HERO ===== */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(31,111,235,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 80% 80%, rgba(63,185,80,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.15;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 80%);
+  }
+
+  .hero-content { position: relative; z-index: 1; }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--green);
+    background: rgba(63,185,80,0.08);
+    border: 1px solid rgba(63,185,80,0.25);
+    border-radius: 20px;
+    padding: 5px 14px;
+    margin-bottom: 32px;
+    animation: fadeSlideIn 0.6s ease both;
+  }
+
+  .hero-badge .dot {
+    width: 6px; height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  h1.hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(52px, 8vw, 96px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -3px;
+    margin-bottom: 8px;
+    animation: fadeSlideIn 0.6s 0.1s ease both;
+  }
+
+  .hero-title .stack { color: var(--text); }
+  .hero-title .skills {
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-tagline {
+    font-family: var(--font-mono);
+    font-size: clamp(14px, 2vw, 18px);
+    color: var(--green);
+    margin-bottom: 24px;
+    animation: fadeSlideIn 0.6s 0.2s ease both;
+  }
+
+  .hero-tagline::before { content: '> '; }
+
+  .hero-subtitle {
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--text-muted);
+    max-width: 620px;
+    line-height: 1.5;
+    margin-bottom: 48px;
+    animation: fadeSlideIn 0.6s 0.3s ease both;
+  }
+
+  .install-block {
+    animation: fadeSlideIn 0.6s 0.4s ease both;
+  }
+
+  .install-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-subtle);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+  }
+
+  .install-cmd {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px 20px;
+    max-width: 560px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .install-cmd::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-dim), transparent);
+  }
+
+  .install-prompt {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--green);
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+
+  .install-text {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text);
+    flex: 1;
+    word-break: break-all;
+  }
+
+  .copy-btn {
+    flex-shrink: 0;
+    margin-left: 12px;
+    padding: 6px 12px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .copy-btn.copied { border-color: var(--green); color: var(--green); }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 48px;
+    animation: fadeSlideIn 0.6s 0.5s ease both;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-subtle);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ===== SECTION HEADERS ===== */
+  .section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .section-desc {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 600px;
+    line-height: 1.6;
+  }
+
+  /* ===== PROBLEM SECTION ===== */
+  #problem {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 60px;
+  }
+
+  .problem-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .problem-card:hover {
+    border-color: var(--red);
+    transform: translateY(-2px);
+  }
+
+  .problem-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--red), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .problem-card:hover::before { opacity: 1; }
+
+  .problem-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .problem-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .problem-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ===== BEFORE/AFTER ===== */
+  #comparison {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .comparison-rows {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .comparison-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .cmp-before, .cmp-after {
+    padding: 20px 24px;
+    border-radius: var(--radius);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .cmp-before {
+    background: rgba(248,81,73,0.06);
+    border: 1px solid rgba(248,81,73,0.2);
+    color: var(--text-muted);
+    position: relative;
+  }
+
+  .cmp-before::before {
+    content: '✗ WITHOUT';
+    display: block;
+    font-size: 10px;
+    color: var(--red);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  .cmp-after {
+    background: rgba(63,185,80,0.06);
+    border: 1px solid rgba(63,185,80,0.2);
+    color: var(--text);
+    position: relative;
+  }
+
+  .cmp-after::before {
+    content: '✓ WITH STACK SKILLS';
+    display: block;
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  .cmp-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px; height: 36px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    color: var(--accent);
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .skill-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    background: rgba(88,166,255,0.1);
+    border: 1px solid rgba(88,166,255,0.2);
+    border-radius: 4px;
+    color: var(--accent);
+    margin-top: 10px;
+    display: inline-block;
+  }
+
+  /* ===== TERMINAL DEMO ===== */
+  #demo {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+
+  .demo-tabs {
+    display: flex;
+    gap: 0;
+    margin-top: 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .demo-tab {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: var(--text-muted);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all 0.2s;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+  }
+
+  .demo-tab:hover { color: var(--text); }
+  .demo-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .demo-panel { display: none; }
+  .demo-panel.active { display: block; }
+
+  .terminal-window {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-top: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  .terminal-header {
+    background: var(--bg3);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .terminal-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+  }
+
+  .dot-red { background: #ff5f57; }
+  .dot-yellow { background: #febc2e; }
+  .dot-green { background: #28c840; }
+
+  .terminal-title {
+    flex: 1;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-subtle);
+    margin-left: -50px;
+  }
+
+  .terminal-body {
+    padding: 24px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.8;
+    min-height: 320px;
+    position: relative;
+  }
+
+  .t-prompt { color: var(--green); }
+  .t-cmd { color: var(--text); }
+  .t-comment { color: var(--text-subtle); }
+  .t-output { color: var(--text-muted); }
+  .t-key { color: var(--accent); }
+  .t-val { color: var(--orange); }
+  .t-label { color: var(--purple); }
+  .t-red { color: var(--red); }
+  .t-gold { color: var(--gold); }
+  .t-green { color: var(--green); }
+  .t-cyan { color: var(--cyan); }
+
+  .terminal-line {
+    display: flex;
+    gap: 0;
+    opacity: 0;
+    transition: opacity 0.1s;
+  }
+
+  .terminal-line.visible { opacity: 1; }
+
+  .t-cursor {
+    display: inline-block;
+    width: 7px; height: 13px;
+    background: var(--green);
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+    margin-left: 1px;
+  }
+
+  .option-bar {
+    display: inline-block;
+    height: 10px;
+    background: var(--accent);
+    border-radius: 2px;
+    margin: 0 6px;
+    vertical-align: middle;
+    transition: width 0.5s ease;
+  }
+
+  .replay-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .replay-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* ===== SKILLS GRID ===== */
+  #skills {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 60px;
+  }
+
+  .skill-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    cursor: default;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, transparent 60%, rgba(88,166,255,0.04));
+    pointer-events: none;
+  }
+
+  .skill-card:hover {
+    border-color: var(--accent-dim);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(31,111,235,0.15);
+  }
+
+  .skill-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-subtle);
+    margin-bottom: 16px;
+  }
+
+  .skill-name {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  .skill-name::before { content: '/'; color: var(--text-subtle); }
+
+  .skill-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .skill-badge {
+    display: inline-block;
+    margin-top: 14px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+
+  .badge-research { background: rgba(88,166,255,0.12); color: var(--accent); border: 1px solid rgba(88,166,255,0.25); }
+  .badge-decision { background: rgba(188,140,255,0.12); color: var(--purple); border: 1px solid rgba(188,140,255,0.25); }
+  .badge-review { background: rgba(248,81,73,0.12); color: var(--red); border: 1px solid rgba(248,81,73,0.25); }
+  .badge-analysis { background: rgba(210,153,34,0.12); color: var(--gold); border: 1px solid rgba(210,153,34,0.25); }
+  .badge-meta { background: rgba(57,211,83,0.12); color: var(--cyan); border: 1px solid rgba(57,211,83,0.25); }
+  .badge-testing { background: rgba(255,166,87,0.12); color: var(--orange); border: 1px solid rgba(255,166,87,0.25); }
+
+  /* ===== BENCHMARK ===== */
+  #benchmark {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+
+  .benchmark-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin-top: 60px;
+  }
+
+  .benchmark-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+  }
+
+  .bm-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-subtle);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px;
+  }
+
+  .bm-scores {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .bm-score {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .bm-num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 1;
+  }
+
+  .bm-num.before { color: var(--text-subtle); }
+  .bm-num.after { color: var(--green); }
+
+  .bm-sublabel {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-subtle);
+  }
+
+  .bm-arrow {
+    font-size: 20px;
+    color: var(--text-subtle);
+    padding-bottom: 8px;
+  }
+
+  .bm-delta {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--green);
+    background: rgba(63,185,80,0.1);
+    border: 1px solid rgba(63,185,80,0.2);
+    border-radius: 6px;
+    padding: 4px 10px;
+  }
+
+  .bm-bar-track {
+    height: 4px;
+    background: var(--bg3);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 16px;
+  }
+
+  .bm-bar-before {
+    height: 100%;
+    background: var(--text-subtle);
+    border-radius: 2px;
+    transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .bm-bar-after {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-dim), var(--green));
+    border-radius: 2px;
+    transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+    margin-top: 6px;
+  }
+
+  .benchmark-total {
+    margin-top: 40px;
+    background: linear-gradient(135deg, rgba(31,111,235,0.08), rgba(63,185,80,0.08));
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .bt-label {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+
+  .bt-scores {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .bt-before {
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--text-subtle);
+    text-decoration: line-through;
+  }
+
+  .bt-after {
+    font-family: var(--font-display);
+    font-size: 64px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bt-delta {
+    font-family: var(--font-mono);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--green);
+  }
+
+  /* ===== INSTALL SECTION ===== */
+  #install {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .install-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 48px;
+  }
+
+  .install-method {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .install-method-header {
+    background: var(--bg3);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .install-method-title {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 700;
+  }
+
+  .install-method-badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+
+  .badge-recommended {
+    background: rgba(63,185,80,0.15);
+    color: var(--green);
+    border: 1px solid rgba(63,185,80,0.3);
+  }
+
+  .badge-manual {
+    background: rgba(88,166,255,0.1);
+    color: var(--accent);
+    border: 1px solid rgba(88,166,255,0.2);
+  }
+
+  .install-method-body {
+    padding: 20px;
+  }
+
+  .code-block {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text);
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .code-block .prompt-char { color: var(--text-subtle); margin-right: 8px; }
+
+  .code-copy {
+    flex-shrink: 0;
+    padding: 4px 8px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-subtle);
+    font-size: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-mono);
+  }
+
+  .code-copy:hover { color: var(--accent); border-color: var(--accent); }
+  .code-copy.copied { color: var(--green); border-color: var(--green); }
+
+  .install-cta {
+    display: flex;
+    gap: 16px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    background: var(--accent-dim);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-lg);
+    color: var(--text);
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05), transparent);
+    pointer-events: none;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent);
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(88,166,255,0.3);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 24px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: var(--text-muted); color: var(--text); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    padding: 40px 24px;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-left {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .footer-left a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .footer-left a:hover { text-decoration: underline; }
+
+  .footer-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .footer-link {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-subtle);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-link:hover { color: var(--text-muted); }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 768px) {
+    nav { padding: 12px 16px; }
+    .nav-links { display: none; }
+    section { padding: 72px 16px; }
+    .hero-stats { gap: 24px; flex-wrap: wrap; }
+    .comparison-row { grid-template-columns: 1fr; gap: 8px; }
+    .cmp-arrow { transform: rotate(90deg); margin: 0 auto; }
+    .benchmark-total { flex-direction: column; text-align: center; }
+    .install-cta { flex-direction: column; align-items: flex-start; }
+    .footer-inner { flex-direction: column; align-items: flex-start; }
+    .demo-tabs { overflow-x: auto; }
+  }
+
+  /* ===== MISC EFFECTS ===== */
+  .glow-blue { text-shadow: 0 0 20px rgba(88,166,255,0.4); }
+  .glow-green { text-shadow: 0 0 20px rgba(63,185,80,0.4); }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* Progress bar animation */
+  .bm-bar-before, .bm-bar-after {
+    width: 0;
+  }
+  .bm-bar-before.animated { width: var(--w-before); }
+  .bm-bar-after.animated { width: var(--w-after); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">
+    <span class="prompt">~/</span>stack-skills<span class="cursor"></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#demo">Demo</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#benchmark">Benchmark</a></li>
+    <li><a href="#install">Install</a></li>
+  </ul>
+  <a class="nav-cta" href="https://github.com/whynowlab/stack-skills" target="_blank">GitHub →</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="container hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Open Source · MIT License · 7 Skills
+    </div>
+    <h1 class="hero-title">
+      <span class="stack">Stack</span><br>
+      <span class="skills">Skills</span>
+    </h1>
+    <p class="hero-tagline">Stack your AI's thinking ability</p>
+    <p class="hero-subtitle">
+      7 meta-cognitive skills that upgrade how your AI thinks — not just what it codes.
+    </p>
+    <div class="install-block">
+      <div class="install-label">Quick Install</div>
+      <div class="install-cmd">
+        <span class="install-prompt">$</span>
+        <span class="install-text">npx skills add whynowlab/stack-skills --all</span>
+        <button class="copy-btn" onclick="copyHero(this)">copy</button>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">7</span>
+        <span class="stat-label">Meta Skills</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">+85%</span>
+        <span class="stat-label">Avg Gain</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">MIT</span>
+        <span class="stat-label">License</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">// the problem</div>
+      <h2 class="section-title">Your AI is<br>thinking wrong.</h2>
+      <p class="section-desc">Not wrong answers. Wrong process. Out-of-the-box AI has hard-coded cognitive biases that no prompt can fix.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card reveal reveal-delay-1">
+        <span class="problem-icon">⚡</span>
+        <div class="problem-title">First-answer bias</div>
+        <p class="problem-desc">Your AI picks the first plausible answer, not the best one. It optimizes for appearing helpful over being correct.</p>
+      </div>
+      <div class="problem-card reveal reveal-delay-2">
+        <span class="problem-icon">🪞</span>
+        <div class="problem-title">Sycophancy trap</div>
+        <p class="problem-desc">It agrees when it should push back. Tell it your idea is great — it'll find reasons to confirm that, even if you're wrong.</p>
+      </div>
+      <div class="problem-card reveal reveal-delay-3">
+        <span class="problem-icon">🌫</span>
+        <div class="problem-title">Research theater</div>
+        <p class="problem-desc">It researches by guessing, not verifying. Confident-sounding outputs with no source validation or tier grading.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section id="comparison">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">// before vs after</div>
+      <h2 class="section-title">The upgrade<br>is structural.</h2>
+      <p class="section-desc">Stack Skills rewires the cognitive pipeline — every interaction runs through a verified, multi-stage process.</p>
+    </div>
+    <div class="comparison-rows">
+      <div class="comparison-row reveal reveal-delay-1">
+        <div class="cmp-before">
+          1 safe answer<br>
+          <span style="color:var(--text-subtle);font-size:11px;">picks the obvious path</span>
+          <br><span class="skill-tag">creativity-sampler</span>
+        </div>
+        <div class="cmp-arrow">→</div>
+        <div class="cmp-after">
+          5 probability-weighted options<br>
+          <span style="color:var(--green);font-size:11px;">fights typicality bias at the root</span>
+        </div>
+      </div>
+      <div class="comparison-row reveal reveal-delay-2">
+        <div class="cmp-before">
+          "Looks good to me"<br>
+          <span style="color:var(--text-subtle);font-size:11px;">sycophantic approval</span>
+          <br><span class="skill-tag">adversarial-review</span>
+        </div>
+        <div class="cmp-arrow">→</div>
+        <div class="cmp-after">
+          3-vector attack that must find problems<br>
+          <span style="color:var(--green);font-size:11px;">Devil's Advocate baked in by design</span>
+        </div>
+      </div>
+      <div class="comparison-row reveal reveal-delay-3">
+        <div class="cmp-before">
+          Uncited claims<br>
+          <span style="color:var(--text-subtle);font-size:11px;">confident-sounding hallucination</span>
+          <br><span class="skill-tag">cross-verified-research</span>
+        </div>
+        <div class="cmp-arrow">→</div>
+        <div class="cmp-after">
+          4-stage verified pipeline with source grading<br>
+          <span style="color:var(--green);font-size:11px;">S/A/B/C tier, cross-referenced claims</span>
+        </div>
+      </div>
+      <div class="comparison-row reveal reveal-delay-4">
+        <div class="cmp-before">
+          Surface-level review<br>
+          <span style="color:var(--text-subtle);font-size:11px;">"the code looks correct"</span>
+          <br><span class="skill-tag">deep-dive-analyzer</span>
+        </div>
+        <div class="cmp-arrow">→</div>
+        <div class="cmp-after">
+          Microscopic deconstruction across 5 lenses<br>
+          <span style="color:var(--green);font-size:11px;">nothing hidden, nothing assumed</span>
+        </div>
+      </div>
+      <div class="comparison-row reveal">
+        <div class="cmp-before">
+          Assumed understanding<br>
+          <span style="color:var(--text-subtle);font-size:11px;">"got it, I'll handle it"</span>
+          <br><span class="skill-tag">tiered-test-generator</span>
+        </div>
+        <div class="cmp-arrow">→</div>
+        <div class="cmp-after">
+          9 tiered questions exposing knowledge gaps<br>
+          <span style="color:var(--green);font-size:11px;">from L1 recall to L9 synthesis</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section id="demo">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">// live demo</div>
+      <h2 class="section-title">See it think<br>differently.</h2>
+      <p class="section-desc">Two skills, two cognitive transformations. Watch the process in real time.</p>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div class="demo-tabs">
+        <button class="demo-tab active" onclick="switchTab('creativity')">creativity-sampler</button>
+        <button class="demo-tab" onclick="switchTab('adversarial')">adversarial-review</button>
+      </div>
+
+      <!-- CREATIVITY PANEL -->
+      <div class="demo-panel active" id="panel-creativity">
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="terminal-dot dot-red"></div>
+            <div class="terminal-dot dot-yellow"></div>
+            <div class="terminal-dot dot-green"></div>
+            <div class="terminal-title">claude — creativity-sampler demo</div>
+          </div>
+          <div class="terminal-body" id="term-creativity">
+            <div id="creativity-output"></div>
+            <span class="t-cursor" id="cursor-creativity"></span>
+          </div>
+        </div>
+        <button class="replay-btn" onclick="replayCreativity()">↺ replay animation</button>
+      </div>
+
+      <!-- ADVERSARIAL PANEL -->
+      <div class="demo-panel" id="panel-adversarial">
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="terminal-dot dot-red"></div>
+            <div class="terminal-dot dot-yellow"></div>
+            <div class="terminal-dot dot-green"></div>
+            <div class="terminal-title">claude — adversarial-review demo</div>
+          </div>
+          <div class="terminal-body" id="term-adversarial">
+            <div id="adversarial-output"></div>
+            <span class="t-cursor" id="cursor-adversarial"></span>
+          </div>
+        </div>
+        <button class="replay-btn" onclick="replayAdversarial()">↺ replay animation</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">// 7 meta-cognitive skills</div>
+      <h2 class="section-title">The complete<br>stack.</h2>
+      <p class="section-desc">Each skill is a cognitive module. Install one. Install all. Stack them together.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal reveal-delay-1">
+        <div class="skill-num">01 / 07</div>
+        <div class="skill-name">cross-verified-research</div>
+        <p class="skill-desc">4-stage research pipeline with source tier grading (S/A/B/C). Cross-references claims across independent sources before committing to any output.</p>
+        <span class="skill-badge badge-research">RESEARCH</span>
+      </div>
+      <div class="skill-card reveal reveal-delay-2">
+        <div class="skill-num">02 / 07</div>
+        <div class="skill-name">creativity-sampler</div>
+        <p class="skill-desc">5 probability-weighted options that fight typicality bias. Scores each option by novelty and feasibility before surfacing the unconventional winner.</p>
+        <span class="skill-badge badge-decision">DECISION</span>
+      </div>
+      <div class="skill-card reveal reveal-delay-3">
+        <div class="skill-num">03 / 07</div>
+        <div class="skill-name">adversarial-review</div>
+        <p class="skill-desc">3-vector Devil's Advocate attack on any decision or plan. Must find real problems — cannot return a clean pass without justification.</p>
+        <span class="skill-badge badge-review">REVIEW</span>
+      </div>
+      <div class="skill-card reveal reveal-delay-4">
+        <div class="skill-num">04 / 07</div>
+        <div class="skill-name">deep-dive-analyzer</div>
+        <p class="skill-desc">Microscopic deconstruction of complex systems across 5 analytical lenses. Surface assumptions, hidden dependencies, and edge cases at depth.</p>
+        <span class="skill-badge badge-analysis">ANALYSIS</span>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-num">05 / 07</div>
+        <div class="skill-name">skill-composer</div>
+        <p class="skill-desc">Multi-skill pipeline orchestration. Chain and compose skills into sequential or parallel workflows for complex, multi-stage cognitive tasks.</p>
+        <span class="skill-badge badge-meta">META</span>
+      </div>
+      <div class="skill-card reveal reveal-delay-1">
+        <div class="skill-num">06 / 07</div>
+        <div class="skill-name">persona-architect</div>
+        <p class="skill-desc">Context-aware AI persona design framework. Builds structured personas with defined reasoning styles, constraints, and cognitive specializations.</p>
+        <span class="skill-badge badge-meta">META</span>
+      </div>
+      <div class="skill-card reveal reveal-delay-2">
+        <div class="skill-num">07 / 07</div>
+        <div class="skill-name">tiered-test-generator</div>
+        <p class="skill-desc">Knowledge verification at multiple difficulty tiers — L1 recall to L9 synthesis. Exposes gaps in understanding that simple Q&A cannot detect.</p>
+        <span class="skill-badge badge-testing">TESTING</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENCHMARK -->
+<section id="benchmark">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">// benchmark results</div>
+      <h2 class="section-title">Numbers that<br>don't lie.</h2>
+      <p class="section-desc">Measured across 120 tasks: research quality, decision breadth, and critical review depth.</p>
+    </div>
+    <div class="benchmark-grid">
+      <div class="benchmark-card reveal reveal-delay-1" data-w-before="50" data-w-after="90">
+        <div class="bm-label">Research Quality</div>
+        <div class="bm-scores">
+          <div class="bm-score">
+            <div class="bm-num before">5</div>
+            <div class="bm-sublabel">before</div>
+          </div>
+          <div class="bm-arrow">→</div>
+          <div class="bm-score">
+            <div class="bm-num after">9</div>
+            <div class="bm-sublabel">after</div>
+          </div>
+        </div>
+        <span class="bm-delta">+80%</span>
+        <div class="bm-bar-track">
+          <div class="bm-bar-before" style="--w-before:50%;--w-after:90%"></div>
+        </div>
+        <div class="bm-bar-track" style="margin-top:6px">
+          <div class="bm-bar-after" style="--w-before:50%;--w-after:90%"></div>
+        </div>
+      </div>
+      <div class="benchmark-card reveal reveal-delay-2" data-w-before="50" data-w-after="90">
+        <div class="bm-label">Decision Breadth</div>
+        <div class="bm-scores">
+          <div class="bm-score">
+            <div class="bm-num before">5</div>
+            <div class="bm-sublabel">before</div>
+          </div>
+          <div class="bm-arrow">→</div>
+          <div class="bm-score">
+            <div class="bm-num after">9</div>
+            <div class="bm-sublabel">after</div>
+          </div>
+        </div>
+        <span class="bm-delta">+80%</span>
+        <div class="bm-bar-track">
+          <div class="bm-bar-before" style="--w-before:50%;--w-after:90%"></div>
+        </div>
+        <div class="bm-bar-track" style="margin-top:6px">
+          <div class="bm-bar-after" style="--w-before:50%;--w-after:90%"></div>
+        </div>
+      </div>
+      <div class="benchmark-card reveal reveal-delay-3" data-w-before="40" data-w-after="80">
+        <div class="bm-label">Review Depth</div>
+        <div class="bm-scores">
+          <div class="bm-score">
+            <div class="bm-num before">4</div>
+            <div class="bm-sublabel">before</div>
+          </div>
+          <div class="bm-arrow">→</div>
+          <div class="bm-score">
+            <div class="bm-num after">8</div>
+            <div class="bm-sublabel">after</div>
+          </div>
+        </div>
+        <span class="bm-delta">+100%</span>
+        <div class="bm-bar-track">
+          <div class="bm-bar-before" style="--w-before:40%;--w-after:80%"></div>
+        </div>
+        <div class="bm-bar-track" style="margin-top:6px">
+          <div class="bm-bar-after" style="--w-before:40%;--w-after:80%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="benchmark-total reveal">
+      <div class="bt-label">Average across all dimensions</div>
+      <div class="bt-scores">
+        <div class="bt-before">4.7</div>
+        <div style="font-size:32px;color:var(--text-subtle);padding-bottom:8px;">→</div>
+        <div class="bt-after">8.7</div>
+      </div>
+      <div class="bt-delta">+85% avg</div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTALL -->
+<section id="install">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">// get started</div>
+      <h2 class="section-title">Ready in<br>60 seconds.</h2>
+      <p class="section-desc">One command installs all 7 skills into your Claude Code environment.</p>
+    </div>
+    <div class="install-methods">
+      <div class="install-method reveal reveal-delay-1">
+        <div class="install-method-header">
+          <span class="install-method-title">// npx (recommended)</span>
+          <span class="install-method-badge badge-recommended">RECOMMENDED</span>
+        </div>
+        <div class="install-method-body">
+          <div class="code-block">
+            <span><span class="prompt-char">$</span> npx skills add whynowlab/stack-skills --all</span>
+            <button class="code-copy" onclick="copyCode(this, 'npx skills add whynowlab/stack-skills --all')">copy</button>
+          </div>
+        </div>
+      </div>
+      <div class="install-method reveal reveal-delay-2">
+        <div class="install-method-header">
+          <span class="install-method-title">// manual git clone</span>
+          <span class="install-method-badge badge-manual">MANUAL</span>
+        </div>
+        <div class="install-method-body">
+          <div class="code-block">
+            <span><span class="prompt-char">$</span> git clone https://github.com/whynowlab/stack-skills</span>
+            <button class="code-copy" onclick="copyCode(this, 'git clone https://github.com/whynowlab/stack-skills')">copy</button>
+          </div>
+          <div class="code-block">
+            <span><span class="prompt-char">$</span> cp -r stack-skills ~/.claude/skills/</span>
+            <button class="code-copy" onclick="copyCode(this, 'cp -r stack-skills ~/.claude/skills/')">copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="install-cta reveal">
+      <a href="https://github.com/whynowlab/stack-skills" target="_blank" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        View on GitHub
+      </a>
+      <a href="https://github.com/whynowlab/stack-skills/blob/main/README.md" target="_blank" class="btn-secondary">
+        Read the docs →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      Built by <a href="https://github.com/whynowlab" target="_blank">@thestack_ai</a> · MIT License ·
+      <a href="https://github.com/whynowlab/stack-skills" target="_blank">github.com/whynowlab/stack-skills</a>
+    </div>
+    <div class="footer-right">
+      <a href="#hero" class="footer-link">↑ top</a>
+      <a href="https://github.com/whynowlab/stack-skills/issues" target="_blank" class="footer-link">issues</a>
+      <a href="https://github.com/whynowlab/stack-skills/blob/main/LICENSE" target="_blank" class="footer-link">license</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ===== SCROLL REVEAL ===== */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ===== BENCHMARK BARS ===== */
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const card = entry.target;
+      const wBefore = card.dataset.wBefore;
+      const wAfter = card.dataset.wAfter;
+      card.querySelectorAll('.bm-bar-before').forEach(b => {
+        b.style.setProperty('--w-before', wBefore + '%');
+        setTimeout(() => { b.style.width = wBefore + '%'; }, 200);
+      });
+      card.querySelectorAll('.bm-bar-after').forEach(b => {
+        b.style.setProperty('--w-after', wAfter + '%');
+        setTimeout(() => { b.style.width = wAfter + '%'; }, 400);
+      });
+      barObserver.unobserve(card);
+    }
+  });
+}, { threshold: 0.4 });
+
+document.querySelectorAll('.benchmark-card').forEach(c => barObserver.observe(c));
+
+/* ===== COPY FUNCTIONS ===== */
+function copyHero(btn) {
+  navigator.clipboard.writeText('npx skills add whynowlab/stack-skills --all').then(() => {
+    btn.textContent = 'copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+function copyCode(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+/* ===== DEMO TABS ===== */
+function switchTab(tab) {
+  document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.demo-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`.demo-tab[onclick*="${tab}"]`).classList.add('active');
+  document.getElementById(`panel-${tab}`).classList.add('active');
+}
+
+/* ===== TERMINAL ANIMATION ENGINE ===== */
+class TerminalAnimator {
+  constructor(outputEl, cursorEl) {
+    this.output = outputEl;
+    this.cursor = cursorEl;
+    this.lines = [];
+    this.running = false;
+    this.timeouts = [];
+  }
+
+  clear() {
+    this.timeouts.forEach(t => clearTimeout(t));
+    this.timeouts = [];
+    this.output.innerHTML = '';
+    this.running = false;
+  }
+
+  schedule(fn, delay) {
+    const t = setTimeout(fn, delay);
+    this.timeouts.push(t);
+    return t;
+  }
+
+  async typeText(container, text, speed, color) {
+    return new Promise(resolve => {
+      let i = 0;
+      const span = document.createElement('span');
+      if (color) span.style.color = `var(${color})`;
+      container.appendChild(span);
+      const type = () => {
+        if (i < text.length) {
+          span.textContent += text[i++];
+          const t = setTimeout(type, speed + (Math.random() * speed * 0.4));
+          this.timeouts.push(t);
+        } else {
+          resolve();
+        }
+      };
+      type();
+    });
+  }
+
+  addLine(html, delay) {
+    return new Promise(resolve => {
+      const t = this.schedule(() => {
+        const div = document.createElement('div');
+        div.innerHTML = html;
+        div.style.opacity = '0';
+        div.style.transition = 'opacity 0.2s';
+        this.output.appendChild(div);
+        requestAnimationFrame(() => { div.style.opacity = '1'; });
+        resolve(div);
+      }, delay);
+    });
+  }
+
+  addBlankLine(delay) {
+    return new Promise(resolve => {
+      const t = this.schedule(() => {
+        const div = document.createElement('div');
+        div.innerHTML = '&nbsp;';
+        this.output.appendChild(div);
+        resolve();
+      }, delay);
+    });
+  }
+}
+
+/* ===== CREATIVITY DEMO ===== */
+let creativityAnimator = null;
+let creativityPlayed = false;
+
+async function playCreativity() {
+  const output = document.getElementById('creativity-output');
+  const cursor = document.getElementById('cursor-creativity');
+
+  if (creativityAnimator) creativityAnimator.clear();
+  creativityAnimator = new TerminalAnimator(output, cursor);
+  output.innerHTML = '';
+
+  const A = creativityAnimator;
+  let t = 0;
+
+  const line = (html, delay) => { t += delay; return A.addLine(html, t); };
+  const blank = (delay) => { t += delay; return A.addBlankLine(t); };
+
+  await line(`<span style="color:var(--text-subtle)"># meta-cognitive skill: creativity-sampler</span>`, 0);
+  await blank(100);
+  await line(`<span style="color:var(--green)">$</span> <span style="color:var(--text)">/creativity-sampler Which database for real-time analytics?</span>`, 200);
+  await blank(80);
+  await line(`<span style="color:var(--text-subtle)">⟳ Sampling probability space...</span>`, 400);
+  await blank(80);
+  await line(`<span style="color:var(--purple)">━━ OPTIONS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>`, 600);
+  await blank(60);
+
+  const options = [
+    { n: '1', name: 'ClickHouse', p: '35%', barW: 35, color: '--accent' },
+    { n: '2', name: 'TimescaleDB', p: '25%', barW: 25, color: '--accent' },
+    { n: '3', name: 'Apache Druid', p: '20%', barW: 20, color: '--accent' },
+    { n: '4', name: 'DuckDB + Parquet', p: '12%', barW: 12, color: '--purple' },
+    { n: '5', name: 'SQLite + cr-sqlite', p: '8%', barW: 8, color: '--orange', tag: '⚡ Unconventional' },
+  ];
+
+  for (const opt of options) {
+    const barHtml = `<span style="display:inline-block;width:${opt.barW * 2}px;height:8px;background:var(${opt.color});border-radius:2px;vertical-align:middle;margin:0 6px;opacity:0.8"></span>`;
+    const tagHtml = opt.tag ? ` <span style="color:var(--orange);font-size:11px">${opt.tag}</span>` : '';
+    await line(
+      `  <span style="color:var(--text-subtle)">${opt.n}.</span> <span style="color:var(${opt.color})">${opt.name}</span>${barHtml}<span style="color:var(--text-subtle)">p ≈ ${opt.p}</span>${tagHtml}`,
+      500
+    );
+  }
+
+  await blank(80);
+  await line(`<span style="color:var(--purple)">━━ HIDDEN ASSUMPTIONS ━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>`, 400);
+  await blank(60);
+  await line(`  <span style="color:var(--text-subtle)">→</span> <span style="color:var(--text)">"Real-time" may mean &lt;100ms query or sub-second ingest</span>`, 300);
+  await line(`  <span style="color:var(--text-subtle)">→</span> <span style="color:var(--text)">Scale: 1GB/day vs 1TB/day changes the optimal path</span>`, 300);
+  await line(`  <span style="color:var(--text-subtle)">→</span> <span style="color:var(--text)">Operational complexity budget not specified</span>`, 300);
+  await blank(60);
+  await line(`<span style="color:var(--green)">✓ Typicality bias defeated — 5 distinct paths surfaced</span>`, 400);
+
+  creativityPlayed = true;
+}
+
+function replayCreativity() {
+  playCreativity();
+}
+
+/* ===== ADVERSARIAL DEMO ===== */
+let adversarialAnimator = null;
+let adversarialPlayed = false;
+
+async function playAdversarial() {
+  const output = document.getElementById('adversarial-output');
+  const cursor = document.getElementById('cursor-adversarial');
+
+  if (adversarialAnimator) adversarialAnimator.clear();
+  adversarialAnimator = new TerminalAnimator(output, cursor);
+  output.innerHTML = '';
+
+  const A = adversarialAnimator;
+  let t = 0;
+
+  const line = (html, delay) => { t += delay; return A.addLine(html, t); };
+  const blank = (delay) => { t += delay; return A.addBlankLine(t); };
+
+  await line(`<span style="color:var(--text-subtle)"># meta-cognitive skill: adversarial-review</span>`, 0);
+  await blank(100);
+  await line(`<span style="color:var(--green)">$</span> <span style="color:var(--text)">/adversarial-review "Migrate auth from JWT to session-based"</span>`, 200);
+  await blank(80);
+  await line(`<span style="color:var(--text-subtle)">⟳ Running Devil's Advocate analysis...</span>`, 400);
+  await line(`<span style="color:var(--text-subtle)">⟳ Generating attack vectors (must find ≥3 issues)...</span>`, 600);
+  await blank(80);
+
+  const vectors = [
+    {
+      n: '1', title: 'Scalability Regression',
+      points: [
+        'Sessions require server-side storage — horizontal scaling breaks',
+        'Redis dependency introduced (single point of failure)',
+        'Sticky sessions or shared cache required for multi-instance'
+      ]
+    },
+    {
+      n: '2', title: 'Mobile Client Breakage',
+      points: [
+        'Native mobile apps use HTTP-only cookies inconsistently',
+        'React Native / Expo need custom session handling',
+        'Existing JWT tokens in localStorage invalidated on cutover'
+      ]
+    },
+    {
+      n: '3', title: 'Migration Gap Risk',
+      points: [
+        'Zero-downtime migration requires dual-auth support window',
+        'Token expiry vs session TTL semantics differ — edge cases',
+        'Logout propagation across tabs not handled by default'
+      ]
+    }
+  ];
+
+  for (const v of vectors) {
+    await line(
+      `<span style="color:var(--red);font-weight:bold">▶ ATTACK VECTOR ${v.n}: ${v.title}</span>`,
+      700
+    );
+    for (const point of v.points) {
+      await line(`  <span style="color:var(--text-subtle)">•</span> <span style="color:var(--text-muted)">${point}</span>`, 300);
+    }
+    await blank(80);
+  }
+
+  await line(`<span style="color:var(--purple)">━━ VERDICT ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>`, 300);
+  await blank(60);
+  await line(`<span style="color:var(--gold);font-weight:bold">⚠  CONDITIONAL PASS</span>`, 400);
+  await line(`<span style="color:var(--text-muted)">   Address Vector 1 (infra) and Vector 2 (mobile) before proceeding.</span>`, 200);
+  await line(`<span style="color:var(--text-muted)">   Vector 3 requires staged rollout plan with dual-auth window.</span>`, 200);
+
+  adversarialPlayed = true;
+}
+
+function replayAdversarial() {
+  playAdversarial();
+}
+
+/* ===== AUTO-PLAY ON SCROLL ===== */
+let demoObserved = false;
+
+const demoObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !demoObserved) {
+      demoObserved = true;
+      playCreativity();
+    }
+  });
+}, { threshold: 0.3 });
+
+const demoSection = document.getElementById('demo');
+if (demoSection) demoObserver.observe(demoSection);
+
+/* Tab switching with auto-play */
+const originalSwitchTab = switchTab;
+window.switchTab = function(tab) {
+  originalSwitchTab(tab);
+  if (tab === 'creativity' && !creativityPlayed) {
+    setTimeout(playCreativity, 200);
+  } else if (tab === 'adversarial' && !adversarialPlayed) {
+    setTimeout(playAdversarial, 200);
+  } else if (tab === 'adversarial') {
+    // auto-play adversarial when user first switches
+    adversarialPlayed = true;
+    setTimeout(playAdversarial, 200);
+  }
+};
+
+// Lazy-init adversarial when tab becomes active
+document.querySelector('.demo-tab[onclick*="adversarial"]').addEventListener('click', function() {
+  if (!adversarialPlayed) {
+    setTimeout(playAdversarial, 250);
+    adversarialPlayed = true;
+  }
+});
+</script>
+</body>
+</html>
