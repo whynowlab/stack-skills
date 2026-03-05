@@ -1,0 +1,14 @@
+{
+  "name": "stack-skills",
+  "display_name": "Stack Skills",
+  "description": "7 meta-cognitive skills that upgrade how your AI thinks. Research deeper, decide smarter, review harder, learn faster.",
+  "author": "thestack_ai",
+  "homepage": "https://github.com/whynowlab/stack-skills",
+  "plugins": [
+    {
+      "name": "stack-skills",
+      "description": "Stack your AI's thinking ability — 7 meta-cognitive skills for research, decision-making, analysis, and knowledge verification.",
+      "skills_path": "skills"
+    }
+  ]
+}
