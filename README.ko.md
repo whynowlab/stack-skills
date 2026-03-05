@@ -1,5 +1,9 @@
 # Stack Skills
 
+<p align="right">
+  <a href="README.md">English</a> · <a href="README.ko.md">한국어 (Korean)</a>
+</p>
+
 **AI의 사고력을 쌓아올리다.**
 
 코드를 작성하는 것이 아니라, AI가 *생각하는 방식*을 업그레이드하는 7개 메타-인지 스킬. 더 깊이 조사하고, 더 날카롭게 결정하고, 더 엄격하게 검증하세요.

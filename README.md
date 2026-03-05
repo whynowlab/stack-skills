@@ -1,5 +1,9 @@
 # Stack Skills
 
+<p align="right">
+  <a href="README.md">English</a> · <a href="README.ko.md">한국어 (Korean)</a>
+</p>
+
 **Stack your AI's thinking ability.**
 
 7 meta-cognitive skills that upgrade how your AI *thinks* — not just what it codes. Research deeper, decide smarter, review harder, learn faster.
