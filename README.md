@@ -58,22 +58,48 @@ These aren't coding shortcuts. They're **thinking upgrades.**
 | Skill | What it does | Trigger |
 |:------|:-------------|:--------|
 | **cross-verified-research** | 4-stage verified research pipeline with source tiering (S/A/B/C) and anti-hallucination gate | `"research"` `"investigate"` `"fact-check"` |
+| | Try: `/cross-verified-research Is gRPC better than REST for mobile backends?` | |
 | **creativity-sampler** | Generates exactly 5 probability-weighted options, forcing at least 1 unconventional alternative | `"alternatives"` `"options"` `"ideas"` |
+| | Try: `/creativity-sampler Which database for a real-time leaderboard?` | |
 | **adversarial-review** | 3-vector Devil's Advocate attack (Logical + Edge Case + Microscopic) with severity grading | `"stress test"` `"devil's advocate"` `"is this okay?"` |
+| | Try: `/adversarial-review We chose Kubernetes for our 3-person startup` | |
 
 ### Workflow & Architecture
 
 | Skill | What it does | Trigger |
 |:------|:-------------|:--------|
 | **skill-composer** | Chains multiple skills into pipelines (Sequential / Fork-Join / Iterative) | `"workflow"` `"pipeline"` `"combine skills"` |
+| | Try: `/skill-composer research + adversarial pipeline for tech decisions` | |
 | **persona-architect** | Designs 5-layer AI persona DNA (Identity / Communication / Behavior / Expertise / Boundaries) | `"persona"` `"voice"` `"tone"` |
+| | Try: `/persona-architect Create a senior security auditor persona` | |
 
 ### Analysis & Testing
 
 | Skill | What it does | Trigger |
 |:------|:-------------|:--------|
 | **deep-dive-analyzer** | Microscopic deconstruction in 3 modes: Code / System / Concept (5-Part Codex) | `"deep dive"` `"analyze"` `"deconstruct"` |
+| | Try: `/deep-dive-analyzer Analyze our authentication flow for vulnerabilities` | |
 | **tiered-test-generator** | 3-tier knowledge verification (Conceptual / Applied / Expert) with grading and diagnostics | `"quiz"` `"knowledge check"` `"challenge me"` |
+| | Try: `/tiered-test-generator Generate verification questions for React hooks` | |
+
+---
+
+## Which Skill Should I Use?
+
+| Your situation | Recommended skill | Why |
+|:--------------|:-----------------|:----|
+| Researching a technology or making a factual claim | `cross-verified-research` | Multi-source verification prevents hallucination |
+| Choosing between multiple options (DB, framework, architecture) | `creativity-sampler` | Forces 5 options including unconventional alternatives |
+| Already made a decision, want to stress-test it | `adversarial-review` | 3-vector attack finds blind spots |
+| Need deep understanding of a complex system | `deep-dive-analyzer` | Layer-by-layer exhaustive analysis |
+| Want to combine multiple skills into a pipeline | `skill-composer` | Chains skills for complex workflows |
+| Need a specialized AI persona for a domain | `persona-architect` | Creates context-aware expert personas |
+| Verifying team knowledge or creating study material | `tiered-test-generator` | Multi-difficulty assessment generation |
+
+### Recommended Chains
+- **Tech Decision**: `creativity-sampler` → `cross-verified-research` → `adversarial-review`
+- **Architecture Review**: `deep-dive-analyzer` → `adversarial-review`
+- **Research Report**: `cross-verified-research` → `deep-dive-analyzer`
 
 ---
 
@@ -123,7 +149,7 @@ These aren't coding shortcuts. They're **thinking upgrades.**
 
 ## Benchmark: Baseline vs Stack Skills
 
-Same tasks, same AI model. Only difference: Stack Skills methodology applied.
+Informal internal comparison using Claude Opus. Scores are subjective quality ratings (1-10) by the author, not independently verified. We share these to illustrate the *type* of improvement, not as a scientific claim. Your results will vary by task and model.
 
 ### Results
 
@@ -145,6 +171,8 @@ Same tasks, same AI model. Only difference: Stack Skills methodology applied.
 | Actionability | "Use X" | SQL configs, timelines, trade-offs |
 
 ### Key findings
+
+> **Note**: These benchmarks reflect the author's evaluation. We welcome community-contributed benchmarks — please open an issue with your own before/after comparisons.
 
 - **Research**: Baseline said "use PostgreSQL." Stack Skills discovered that 1000 concurrent users = ~30 concurrent writes = **120x headroom for SQLite**. Completely different conclusion.
 - **Decision**: Baseline said "use Zustand." Stack Skills discovered that **where you store the cart (server vs client) matters more than which library you pick**.
