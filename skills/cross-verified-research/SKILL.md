@@ -13,11 +13,16 @@ Systematic research engine with anti-hallucination safeguards and source quality
 ## Rules (Absolute)
 
 1. **Never fabricate sources.** No fake URLs, no invented papers, no hallucinated statistics.
-2. **Confidence gate.** If confidence < 90% on a factual claim, do NOT present it as fact. State uncertainty explicitly.
+2. **Source-traceability gate.** Every factual claim must be traceable to a specific, citable source. If a claim cannot be traced to any source, mark it as **Unverified (internal knowledge only)** and state what verification would be needed. Never present untraced claims as findings.
 3. **No speculation as fact.** Do not present unverified claims using hedging language as if they were findings. Banned patterns: "아마도", "~인 것 같습니다", "~로 보입니다", "~수도 있습니다", "probably", "I think", "seems like", "appears to be", "likely". If a claim is not verified, label it explicitly as **Unverified** or **Contested** — do not soften it with hedging.
 4. **BLUF output.** Lead with conclusion, follow with evidence. Never bury the answer.
-5. **Minimum effort.** At least 5 distinct search queries per research task. At least 5 verified sources in final output.
-6. **Cross-verify.** Every key claim must appear in 2+ independent sources before presenting as fact.
+5. **Scaled effort.** Match research depth to question scope:
+   - **Narrow factual** (single claim, date, specification): 2-3 queries, 2+ sources
+   - **Technology comparison** (A vs B): 5+ queries, 5+ sources
+   - **Broad landscape** (market analysis, state-of-art): 8+ queries, 8+ sources
+   Default to the higher tier when scope is ambiguous.
+6. **Cross-verify.** Every key claim must appear in 2+ independent sources before presenting as fact. "Independent" means the sources conducted their own analysis or reporting — two articles that both cite the same original source (press release, blog post, study) count as ONE source, not two. Trace claims back to their origin.
+7. **Scope before search.** If the research question is ambiguous or overly broad, decompose it into specific sub-questions in Stage 1 and present them to the user for confirmation before proceeding to Stage 2. Do not research a vague question — sharpen it first.
 
 ## Pipeline
 
@@ -38,7 +43,8 @@ Decomposed:
 ```
 
 - Identify what requires external verification vs. internal knowledge
-- Flag any sub-question where confidence < 90%
+- If the original question is vague or overly broad, present the decomposed sub-questions to the user for confirmation before proceeding (Rule 7)
+- For each sub-question, note what a traceable source would look like
 
 ### Stage 2: Search & Collect
 
@@ -49,8 +55,9 @@ For each sub-question requiring verification:
 3. **Classify every source** by tier immediately (see Source Tiers below)
 4. **Extract specific data points** — numbers, dates, versions, quotes with attribution
 5. **Record contradictions** — when sources disagree, note both positions
+6. **Trace origin** — when multiple sources cite the same underlying source, identify the original
 
-Minimum search pattern:
+Search pattern (scale per Rule 5):
 ```
 Query 1: [topic] + "benchmark" or "comparison"
 Query 2: [topic] + "production" or "enterprise"
@@ -71,6 +78,8 @@ For each key finding:
 - Does it appear in 2+ independent Tier S/A sources? → **Verified**
 - Does it appear in only 1 source? → **Unverified** (label it)
 - Do sources contradict? → **Contested** (present both sides with tier labels)
+
+Remember: "independent" means each source did its own analysis. Two articles both citing the same benchmark study = 1 source.
 
 Build a verification matrix:
 ```
@@ -124,6 +133,91 @@ Produce the final report in BLUF format.
 #### Tier C — General
 - [Title](URL)
 ```
+
+## Quality Calibration
+
+### BAD Example — What to Avoid
+
+```markdown
+## Research: Is Rust faster than Go for web servers?
+
+### Conclusion (BLUF)
+Rust is generally faster than Go for web servers due to zero-cost abstractions.
+
+### Key Findings
+1. **Rust is 2-5x faster than Go** — Rust's ownership model eliminates GC pauses.
+   Sources: 🛡️ https://rust-performance-comparison.example.com
+2. **Rust uses less memory** — Typically 50% less memory in production.
+   Sources: 🛡️ https://memory-benchmarks.example.com
+3. **Go is easier to learn** — Most developers pick up Go in a week.
+   Sources: 🏛️ https://developer-survey.example.com
+
+### Verification Matrix
+| Claim | Sources | Tier | Status |
+|-------|---------|------|--------|
+| 2-5x faster | 1 benchmark site | A | Verified |
+| 50% less memory | 1 benchmark site | A | Verified |
+```
+
+**Why this is bad:**
+- Source URLs are fabricated (nonexistent domains)
+- "2-5x faster" and "50% less memory" are presented as **Verified** with only 1 source each
+- No contested claims section despite this being a nuanced topic
+- Claims are restated internal knowledge dressed up with fake citations
+- No origin tracing — where did "2-5x" come from?
+- The "Verified" labels are false — nothing was actually cross-verified
+
+### GOOD Example — What to Aim For
+
+```markdown
+## Research: Is Rust faster than Go for web servers?
+
+### Conclusion (BLUF)
+Rust outperforms Go in raw throughput benchmarks (typically 1.5-3x in TechEmpower), but the gap narrows significantly with real-world I/O workloads. Go's GC pauses (sub-millisecond since Go 1.19) are rarely a bottleneck for typical web services. Choose based on your latency tail requirements, not averages.
+
+### Key Findings
+1. **Rust frameworks lead TechEmpower benchmarks** — Actix-web and Axum consistently rank in the top 10; Go's stdlib and Gin rank 20-40 range in plaintext/JSON tests.
+   Sources: 🏛️ TechEmpower Round 22 (2024), 🛡️ Axum GitHub benchmarks
+2. **Go's GC latency is sub-millisecond since 1.19** — p99 GC pause < 500μs confirmed by the Go team.
+   Sources: 🛡️ Go Blog "Getting to Go" (2022), 🛡️ Go 1.19 Release Notes
+3. **Real-world gap is smaller than microbenchmarks suggest** — Discord's 2020 migration (Go→Rust) showed tail latency improvements, but their workload (millions of concurrent connections) is atypical.
+   Sources: 🛡️ Discord Engineering Blog (2020), ⚠️ HN discussion with Discord engineer comments
+
+### Contested / Uncertain
+- ⚠️ **"Rust uses 50% less memory than Go"** — Frequently repeated on Reddit/HN but no independent benchmark reproduces a consistent figure. Memory usage depends heavily on allocator choice (jemalloc vs system) and workload. **Unverified.**
+- ⚠️ **Developer productivity trade-off** — Go advocates claim 2-3x faster development time. No peer-reviewed study supports a specific multiplier. **Unverified (internal knowledge only)** — would need controlled study to verify.
+
+### Verification Matrix
+| Claim | Sources | Tier | Status |
+|-------|---------|------|--------|
+| Rust 1.5-3x faster (synthetic) | TechEmpower R22 (S), Axum bench (A) | S+A | Verified |
+| Go GC < 500μs p99 | Go Blog (A), Release Notes (A) | A+A | Verified |
+| Discord latency improvement | Discord Blog (A), HN thread (B) | A+B | Verified (single case study) |
+| Rust 50% less memory | Reddit threads (B) only | B | Unverified |
+| Go 2-3x dev speed | No source found | — | Unverified (internal knowledge only) |
+
+### Sources
+
+#### 🏛️ Tier S — Academic & Primary Research
+- [TechEmpower Framework Benchmarks Round 22](https://www.techempower.com/benchmarks/) — TechEmpower (2024)
+
+#### 🛡️ Tier A — Trusted Official
+- [Getting to Go: The Journey of Go's Garbage Collector](https://go.dev/blog/ismmkeynote) — Go Blog (2022)
+- [Go 1.19 Release Notes](https://go.dev/doc/go1.19) — Go Team (2022)
+- [Why Discord is Switching from Go to Rust](https://discord.com/blog/why-discord-is-switching-from-go-to-rust) — Discord Engineering (2020)
+- [Axum Benchmarks](https://github.com/tokio-rs/axum) — Tokio Project
+
+#### ⚠️ Tier B — Community / Caution
+- [HN Discussion on Discord migration](https://news.ycombinator.com/item?id=22238289) — Hacker News (2020)
+```
+
+**Why this is good:**
+- Every URL is a real, verifiable page
+- Claims that lack sources are explicitly labeled **Unverified**
+- The "50% less memory" myth is called out rather than repeated
+- Verification matrix honestly shows what's verified vs. not
+- Sources are independent (TechEmpower did their own benchmarks, not citing each other)
+- Nuance preserved: "the gap narrows with real-world I/O"
 
 ## Source Tiers
 

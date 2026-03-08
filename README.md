@@ -4,181 +4,187 @@
   <a href="README.md">English</a> · <a href="README.ko.md">한국어 (Korean)</a>
 </p>
 
-**Stack your AI's thinking ability.**
+**5 cognitive firewalls for your AI coding agent.**
 
-Your AI writes code fast. But does it *think* well?
-
-It picks the first answer, not the best one. It agrees when it should push back. It researches by guessing, not verifying. **Stack Skills fixes that.**
-
-> 7 meta-cognitive skills that upgrade how your AI *thinks* — not just what it codes.
+Each one defends against a specific reasoning failure — hallucination, anchoring bias, confirmation bias, black-box logic, and blind optimism.
 
 ```
 npx skills add whynowlab/stack-skills --all
 ```
 
-> Built for [Claude Code](https://claude.com/claude-code) | Compatible with 41 AI agents via [Agent Skills](https://agentskills.io) open standard
+> Built for [Claude Code](https://claude.com/claude-code) | Compatible with AI agents via [Agent Skills](https://agentskills.io) open standard
 > Created by [@thestack_ai](https://github.com/whynowlab)
-
-<p align="center">
-  <img src="assets/demo-hero.png" alt="Stack Skills Demo" width="720">
-</p>
 
 ---
 
 ## The Problem
 
-You ask your AI to choose a database. It says "use PostgreSQL" — the safe default.
+Your AI writes code fast. But it reasons poorly.
 
-You ask it to review your architecture. It says "looks good" — because agreeing is easy.
+Ask it to choose a database — it says "use PostgreSQL." The safe default, every time.
 
-You ask it to research a claim. It makes up a plausible answer — and you can't tell.
+Ask it to review your architecture — it says "looks good." Agreeing is easier than thinking.
 
-**Your AI is fast but shallow. Stack Skills make it slow down and actually think.**
+Ask it to research a claim — it makes up a plausible answer you can't distinguish from fact.
+
+Ask it why it recommends something — it gives you a conclusion with no visible reasoning chain.
+
+Ask it what could go wrong — it lists generic risks that apply to everything and nothing.
+
+**These are five distinct reasoning failures. Stack Skills installs a firewall against each one.**
 
 ---
 
-## Before vs After
+## Five Failures, Five Firewalls
 
-| Without Stack Skills | With Stack Skills |
-|:---|:---|
-| 1 safe answer | 5 options with probability weights — including ideas your AI would normally suppress |
-| "Looks good" | 3-vector attack that *must* find problems. "Looks good" is banned. |
-| Uncited claims | 4-stage verified research with source grading (S/A/B/C) |
-| Surface-level review | Microscopic deconstruction across 5 analytical lenses |
-| Assumed understanding | 9 tiered questions that expose what you actually don't know |
-
-These aren't coding shortcuts. They're **thinking upgrades.**
+| Cognitive Failure | What Happens | Firewall | What It Forces |
+|:---|:---|:---|:---|
+| **Hallucination** | AI states claims without verification | `cross-verified-research` | Source-traced, cross-verified claims with S/A/B/C tier grading |
+| **Anchoring bias** | AI locks onto the first "obvious" answer | `creativity-sampler` | 5 probability-weighted options including unconventional alternatives |
+| **Confirmation bias** | AI agrees with you instead of challenging | `adversarial-review` | Steel-man then 3-vector attack. "Looks good" is structurally banned |
+| **Black-box reasoning** | AI gives conclusions without showing why | `reasoning-tracer` | Visible assumption inventory, confidence decomposition, weakest-link analysis |
+| **Optimism bias** | AI assumes the plan will work | `pre-mortem` | Assumes failure, identifies 5 specific failure scenarios with circuit breakers |
 
 ---
 
 ## Skills
 
-### Research & Decision
+### cross-verified-research
 
-| Skill | What it does | Trigger |
-|:------|:-------------|:--------|
-| **cross-verified-research** | 4-stage verified research pipeline with source tiering (S/A/B/C) and anti-hallucination gate | `"research"` `"investigate"` `"fact-check"` |
-| | Try: `/cross-verified-research Is gRPC better than REST for mobile backends?` | |
-| **creativity-sampler** | Generates exactly 5 probability-weighted options, forcing at least 1 unconventional alternative | `"alternatives"` `"options"` `"ideas"` |
-| | Try: `/creativity-sampler Which database for a real-time leaderboard?` | |
-| **adversarial-review** | 3-vector Devil's Advocate attack (Logical + Edge Case + Microscopic) with severity grading | `"stress test"` `"devil's advocate"` `"is this okay?"` |
-| | Try: `/adversarial-review We chose Kubernetes for our 3-person startup` | |
+4-stage verified research pipeline with anti-hallucination safeguards.
 
-### Workflow & Architecture
+```
+Deconstruct → Search & Collect → Cross-Verify → Synthesize
+```
 
-| Skill | What it does | Trigger |
-|:------|:-------------|:--------|
-| **skill-composer** | Chains multiple skills into pipelines (Sequential / Fork-Join / Iterative) | `"workflow"` `"pipeline"` `"combine skills"` |
-| | Try: `/skill-composer research + adversarial pipeline for tech decisions` | |
-| **persona-architect** | Designs 5-layer AI persona DNA (Identity / Communication / Behavior / Expertise / Boundaries) | `"persona"` `"voice"` `"tone"` |
-| | Try: `/persona-architect Create a senior security auditor persona` | |
+- Every claim must be traced to a specific, citable source — or labeled `Unverified`
+- Source tiering: S (academic/specs), A (official docs), B (community — flagged), C (general)
+- Cross-verification: key claims require 2+ *independent* sources (same-origin rewrites don't count)
+- Adaptive depth: narrow questions get 2-3 queries, broad landscape gets 8+
 
-### Analysis & Testing
+```
+Try: /cross-verified-research Is gRPC better than REST for mobile backends?
+```
 
-| Skill | What it does | Trigger |
-|:------|:-------------|:--------|
-| **deep-dive-analyzer** | Microscopic deconstruction in 3 modes: Code / System / Concept (5-Part Codex) | `"deep dive"` `"analyze"` `"deconstruct"` |
-| | Try: `/deep-dive-analyzer Analyze our authentication flow for vulnerabilities` | |
-| **tiered-test-generator** | 3-tier knowledge verification (Conceptual / Applied / Expert) with grading and diagnostics | `"quiz"` `"knowledge check"` `"challenge me"` |
-| | Try: `/tiered-test-generator Generate verification questions for React hooks` | |
+### creativity-sampler
+
+Probability-weighted option generator that breaks anchoring bias.
+
+- 5 options by default, each assigned a typicality zone (Conventional → Wild card)
+- At least 1 option from the unconventional or wild card zone — ideas your AI normally suppresses
+- **Hidden Assumptions** section exposes *why* the obvious answer seems obvious
+- Decision matrix with criteria derived from your stated constraints + 1 hidden criterion you didn't consider
+
+```
+Try: /creativity-sampler Which database for a real-time leaderboard?
+```
+
+### adversarial-review
+
+Structured Devil's Advocate that finds real problems, not nitpicks.
+
+- **Steel-man first**: articulates the strongest case FOR the current approach before attacking
+- **3 independent vectors**: Logical Soundness / Edge Case Assault / Structural Integrity
+- Severity classification: Critical (must fix) / Major (should fix) / Minor / Note
+- Every Critical and Major finding includes a counter-proposal with trade-off analysis
+- Explicit verdict thresholds: any unmitigated Critical = FAIL
+
+```
+Try: /adversarial-review We chose Kubernetes for our 3-person startup
+```
+
+### reasoning-tracer
+
+Makes AI reasoning visible, auditable, and decomposable.
+
+- **Assumption inventory**: every assumption numbered, rated for criticality and verifiability
+- **Decision tree**: at each reasoning fork, what alternative was considered and why it was rejected
+- **Confidence decomposition**: overall confidence broken into sub-components with justifications
+- **Weakest link**: which single assumption, if wrong, would most change the conclusion
+- **Alternative conclusion**: "If [weakest assumption] is wrong, then the answer changes to [X]"
+
+```
+Try: /reasoning-tracer Why do you recommend microservices for this project?
+```
+
+### pre-mortem
+
+Prospective failure analysis — assumes your plan failed and works backward.
+
+- "It is 6 months from now. This failed completely. What went wrong?"
+- 5 failure scenarios across categories: Technical / Organizational / External / Temporal / Assumption
+- Likelihood x Impact matrix → focus on top 3 risks
+- **Leading indicators**: measurable early-warning signals for each top risk
+- **Circuit breakers**: specific trigger conditions for when to stop and pivot
+
+```
+Try: /pre-mortem We're migrating our monolith to microservices over Q3
+```
 
 ---
 
 ## Which Skill Should I Use?
 
-| Your situation | Recommended skill | Why |
-|:--------------|:-----------------|:----|
-| Researching a technology or making a factual claim | `cross-verified-research` | Multi-source verification prevents hallucination |
-| Choosing between multiple options (DB, framework, architecture) | `creativity-sampler` | Forces 5 options including unconventional alternatives |
-| Already made a decision, want to stress-test it | `adversarial-review` | 3-vector attack finds blind spots |
-| Need deep understanding of a complex system | `deep-dive-analyzer` | Layer-by-layer exhaustive analysis |
-| Want to combine multiple skills into a pipeline | `skill-composer` | Chains skills for complex workflows |
-| Need a specialized AI persona for a domain | `persona-architect` | Creates context-aware expert personas |
-| Verifying team knowledge or creating study material | `tiered-test-generator` | Multi-difficulty assessment generation |
+| Your situation | Skill | Why |
+|:--------------|:------|:----|
+| Researching a technology or verifying a claim | `cross-verified-research` | Source-traced verification prevents hallucination |
+| Choosing between options (DB, framework, architecture) | `creativity-sampler` | Breaks anchoring, surfaces unconventional alternatives |
+| Made a decision, want to stress-test it | `adversarial-review` | Finds real flaws through structured adversarial analysis |
+| Want to understand WHY the AI recommends something | `reasoning-tracer` | Makes assumptions and reasoning chain auditable |
+| Planning a project and want to de-risk it | `pre-mortem` | Identifies specific failure modes before they happen |
 
 ### Recommended Chains
+
 - **Tech Decision**: `creativity-sampler` → `cross-verified-research` → `adversarial-review`
-- **Architecture Review**: `deep-dive-analyzer` → `adversarial-review`
-- **Research Report**: `cross-verified-research` → `deep-dive-analyzer`
+- **Architecture Review**: `reasoning-tracer` → `adversarial-review`
+- **Project Kickoff**: `pre-mortem` → `creativity-sampler` (for mitigations)
+- **Full Rigor**: `creativity-sampler` → `cross-verified-research` → `adversarial-review` → `pre-mortem`
 
 ---
 
 ## How They Work Together
 
 ```
-                        skill-composer
-                    (chains everything below)
-                             |
-         +-------------------+-------------------+
-         |                   |                   |
-   cross-verified      creativity          persona
-     -research          -sampler           -architect
-   "verify facts"    "open options"     "set the voice"
-         |                   |
-         v                   v
-    deep-dive          adversarial
-    -analyzer            -review
-  "understand it"     "break it"
-         |
-         v
-    tiered-test
-    -generator
-   "prove you know it"
+Your AI's default reasoning:
+
+  [Question] ──→ [First plausible answer] ──→ [Ship it]
+
+
+With Stack Skills:
+
+  [Question]
+       │
+       ├──→ creativity-sampler ──→ "What are ALL the options?"  (breaks anchoring)
+       │
+       ├──→ cross-verified-research ──→ "Is this actually true?"  (blocks hallucination)
+       │
+       ├──→ reasoning-tracer ──→ "WHY do I believe this?"  (exposes assumptions)
+       │
+       ├──→ adversarial-review ──→ "What's WRONG with this?"  (kills confirmation bias)
+       │
+       └──→ pre-mortem ──→ "HOW will this FAIL?"  (counters optimism bias)
 ```
 
-### Example Workflow: "Full-Rigor Tech Decision"
-
-```
-1. /creativity-sampler "Which database for our real-time analytics?"
-   → 5 options with trade-offs (including unconventional ones)
-
-2. /cross-verified-research "Compare ClickHouse vs TimescaleDB for 100K events/sec"
-   → Cross-verified analysis with source tiers
-
-3. /adversarial-review "We chose ClickHouse — stress test this decision"
-   → 3-vector attack exposing hidden assumptions
-
-4. /deep-dive-analyzer "ClickHouse MergeTree engine internals"
-   → Microscopic deconstruction of the chosen technology
-
-5. /tiered-test-generator "ClickHouse architecture and query optimization"
-   → 9 questions to verify team understanding before implementation
-```
+Each firewall is independent — use one, or chain them.
 
 ---
 
 ## Benchmark: Baseline vs Stack Skills
 
-Informal internal comparison using Claude Opus. Scores are subjective quality ratings (1-10) by the author, not independently verified. We share these to illustrate the *type* of improvement, not as a scientific claim. Your results will vary by task and model.
+Informal comparison using Claude Opus. Scores are subjective quality ratings (1-10) by the author. We share these to illustrate the *type* of improvement. Your results will vary.
 
-### Results
-
-| Scenario | Baseline | Stack Skills | Improvement |
-|:---------|:--------:|:-----------:|:-----------:|
+| Scenario | Baseline | Stack Skills | Change |
+|:---------|:--------:|:-----------:|:------:|
 | Research: "Is SQLite viable for 1000 concurrent users?" | 5/10 | 9/10 | **+80%** |
 | Decision: "Which state management for React e-commerce?" | 5/10 | 9/10 | **+80%** |
 | Review: "Single PostgreSQL for OLTP + analytics?" | 4/10 | 8/10 | **+100%** |
-| **Average** | **4.7** | **8.7** | **+85%** |
 
-### What changed?
+**What changed:**
+- **Research**: Baseline said "use PostgreSQL." With cross-verified-research, it found 1000 concurrent users = ~30 concurrent writes = 120x headroom for SQLite. Completely different conclusion, backed by cited benchmarks.
+- **Decision**: Baseline said "use Zustand." With creativity-sampler, it discovered that *where* you store the cart (server vs client) matters more than *which* library you pick. A better question, not just a better answer.
+- **Review**: Baseline listed 4 generic concerns. With adversarial-review, it found a Critical multi-tenant data leakage via analytics queries — and provided the RLS fix with SQL.
 
-| Dimension | Without Stack Skills | With Stack Skills |
-|:----------|:---------------------|:------------------|
-| Sources cited | 0 | 10 (including Tier S academic/official) |
-| Options explored | 1-3 (safe defaults) | 5 (including unconventional alternatives) |
-| Issues found | 4 (surface-level) | 12 (4 Critical severity) |
-| Hidden assumptions exposed | 0 | 5+ |
-| Actionability | "Use X" | SQL configs, timelines, trade-offs |
-
-### Key findings
-
-> **Note**: These benchmarks reflect the author's evaluation. We welcome community-contributed benchmarks — please open an issue with your own before/after comparisons.
-
-- **Research**: Baseline said "use PostgreSQL." Stack Skills discovered that 1000 concurrent users = ~30 concurrent writes = **120x headroom for SQLite**. Completely different conclusion.
-- **Decision**: Baseline said "use Zustand." Stack Skills discovered that **where you store the cart (server vs client) matters more than which library you pick**.
-- **Review**: Baseline listed 4 general concerns. Stack Skills found a **Critical security issue** (multi-tenant data leakage via analytics queries) and provided the RLS fix with SQL.
-
-> Baseline gives you **an answer**. Stack Skills helps you **find better questions**.
+> We welcome community benchmarks — please open an issue with your own before/after comparisons.
 
 ---
 
@@ -190,11 +196,14 @@ Informal internal comparison using Claude Opus. Scores are subjective quality ra
 npx skills add whynowlab/stack-skills --all
 ```
 
-### Plugin Marketplace
+### Individual Skills
 
 ```bash
-/plugin marketplace add whynowlab/stack-skills
-/plugin install stack-skills@whynowlab/stack-skills
+npx skills add whynowlab/stack-skills/cross-verified-research
+npx skills add whynowlab/stack-skills/adversarial-review
+npx skills add whynowlab/stack-skills/creativity-sampler
+npx skills add whynowlab/stack-skills/reasoning-tracer
+npx skills add whynowlab/stack-skills/pre-mortem
 ```
 
 ### Manual
@@ -207,8 +216,7 @@ cp -r stack-skills/skills/* ~/.claude/skills/
 ### Per-Project
 
 ```bash
-# Add to your project's .claude/skills/ directory
-cp -r stack-skills/skills/cross-verified-research .claude/skills/
+cp -r stack-skills/skills/adversarial-review .claude/skills/
 ```
 
 ---
@@ -230,4 +238,4 @@ MIT License. See [LICENSE](LICENSE).
 
 ---
 
-**Stack Skills** by [@thestack_ai](https://github.com/whynowlab) — Stack your AI's thinking ability.
+**Stack Skills** by [@thestack_ai](https://github.com/whynowlab) — 5 cognitive firewalls for your AI.

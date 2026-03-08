@@ -4,166 +4,182 @@
   <a href="README.md">English</a> · <a href="README.ko.md">한국어 (Korean)</a>
 </p>
 
-**AI의 사고력을 쌓아올리다.**
+**AI 코딩 에이전트를 위한 5개 인지 방화벽.**
 
-당신의 AI는 코드를 빠르게 씁니다. 그런데 *생각*을 잘 하나요?
-
-첫 번째 답을 고르지, 최선의 답을 고르지 않습니다. 반론을 제기해야 할 때 동의합니다. 검증 없이 그럴듯한 답을 지어냅니다. **Stack Skills가 그걸 바꿉니다.**
-
-> AI가 코드를 쓰는 방식이 아니라, *생각하는 방식*을 업그레이드하는 7개 메타-인지 스킬.
+환각, 고착 편향, 확증 편향, 블랙박스 사고, 낙관 편향 — 5가지 추론 실패에 각각 대응합니다.
 
 ```
 npx skills add whynowlab/stack-skills --all
 ```
 
-> [Claude Code](https://claude.com/claude-code) 전용 | 41개 AI 에이전트 호환 via [Agent Skills](https://agentskills.io) 오픈 표준
+> [Claude Code](https://claude.com/claude-code) 전용 | [Agent Skills](https://agentskills.io) 오픈 표준으로 다른 AI 에이전트 호환
 > Created by [@thestack_ai](https://github.com/whynowlab)
 
 ---
 
 ## 문제
 
-AI에게 데이터베이스를 고르라고 합니다. "PostgreSQL 쓰세요" — 안전한 기본값.
+AI가 코드는 빠르게 씁니다. 하지만 추론은 허술합니다.
 
-아키텍처 리뷰를 요청합니다. "괜찮아 보입니다" — 동의하는 게 쉬우니까.
+데이터베이스를 고르라고 하면 — "PostgreSQL 쓰세요." 매번 같은 안전한 기본값.
 
-어떤 주장을 조사해달라고 합니다. 그럴듯한 답을 지어냅니다 — 구분도 안 됩니다.
+아키텍처 리뷰를 요청하면 — "괜찮아 보입니다." 동의가 생각보다 쉬우니까.
 
-**당신의 AI는 빠르지만 얕습니다. Stack Skills는 속도를 늦추고 진짜 생각하게 만듭니다.**
+어떤 주장을 조사해달라고 하면 — 사실과 구분 안 되는 그럴듯한 답을 지어냅니다.
 
----
+왜 이걸 추천하냐고 물으면 — 결론만 주고 추론 과정은 보이지 않습니다.
 
-## 설치 전 vs 설치 후
+뭐가 잘못될 수 있냐고 물으면 — 아무 데나 적용되는 일반론을 나열합니다.
 
-| Stack Skills 없이 | Stack Skills 적용 |
-|:---|:---|
-| 안전한 답 1개 | 확률 가중치가 붙은 5개 옵션 — AI가 평소 억제하는 아이디어 포함 |
-| "괜찮아 보입니다" | 반드시 문제를 찾아야 하는 3벡터 공격. "괜찮다"는 출력 금지. |
-| 출처 없는 주장 | 소스 등급(S/A/B/C)이 붙은 4단계 검증 리서치 |
-| 표면적 리뷰 | 5개 분석 렌즈를 통한 현미경 해부 |
-| 이해했다는 가정 | 실제로 모르는 것을 드러내는 3단계 9문제 |
+**5가지 추론 실패, 5개 방화벽으로 방어합니다.**
 
 ---
 
-## 스킬 목록
+## 5가지 실패, 5개 방화벽
 
-### 리서치 & 의사결정
+| 인지 실패 | 증상 | 방화벽 | 강제하는 것 |
+|:---|:---|:---|:---|
+| **환각** | 검증 없이 주장 | `cross-verified-research` | 출처 추적, 교차 검증, S/A/B/C 소스 등급제 |
+| **고착 편향** | 첫 번째 "뻔한" 답에 고정 | `creativity-sampler` | 확률 가중치 5개 옵션 + 비관습적 대안 강제 |
+| **확증 편향** | 반론 대신 동의 | `adversarial-review` | Steel-man 후 3벡터 공격. "괜찮다"는 구조적으로 불가 |
+| **블랙박스 사고** | 근거 없이 결론만 제시 | `reasoning-tracer` | 가정 목록, 신뢰도 분해, 최약점 분석 |
+| **낙관 편향** | 계획이 성공할 거라 가정 | `pre-mortem` | 실패 가정 후 역추적, 5개 시나리오 + 회로 차단기 |
 
-| 스킬 | 기능 | 트리거 |
-|:------|:-----|:--------|
-| **cross-verified-research** | 4단계 검증 리서치 파이프라인, 소스 등급제 (S/A/B/C), 반환각 게이트 | `"조사해줘"` `"리서치"` `"검증해줘"` |
-| | 사용 예: `/cross-verified-research 모바일 백엔드에 gRPC가 REST보다 나은가?` | |
-| **creativity-sampler** | 확률 가중치 기반 5개 옵션 생성, p<10% 비관습적 대안 강제 포함 | `"대안"` `"옵션 뽑아"` `"아이디어"` |
-| | 사용 예: `/creativity-sampler 실시간 리더보드에 어떤 데이터베이스?` | |
-| **adversarial-review** | 3벡터 악마의 변호인 공격 (논리/엣지케이스/마이크로분해) + 심각도 분류 | `"스트레스 테스트"` `"이거 괜찮아"` `"문제 없을까"` |
-| | 사용 예: `/adversarial-review 3인 스타트업에서 Kubernetes를 선택했다` | |
+---
 
-### 워크플로우 & 아키텍처
+## 스킬
 
-| 스킬 | 기능 | 트리거 |
-|:------|:-----|:--------|
-| **skill-composer** | 다중 스킬 파이프라인 구성 (Sequential / Fork-Join / Iterative) | `"워크플로우"` `"파이프라인"` `"스킬 조합"` |
-| | 사용 예: `/skill-composer 기술 의사결정을 위한 research + adversarial 파이프라인` | |
-| **persona-architect** | 5레이어 AI 페르소나 DNA 설계 (정체성/소통/행동/전문성/경계) | `"페르소나"` `"역할 설정"` `"톤 설정"` |
-| | 사용 예: `/persona-architect 시니어 보안 감사관 페르소나 생성` | |
+### cross-verified-research
 
-### 분석 & 테스트
+4단계 검증 리서치 파이프라인. 반환각 방어.
 
-| 스킬 | 기능 | 트리거 |
-|:------|:-----|:--------|
-| **deep-dive-analyzer** | 3모드 마이크로 분석: 코드 / 시스템 / 컨셉 (5부 코덱스 구조) | `"심층 분석"` `"분석해줘"` `"뜯어봐"` |
-| | 사용 예: `/deep-dive-analyzer 인증 플로우의 취약점 분석` | |
-| **tiered-test-generator** | 3단계 지식 검증 (개념/응용/전문가) + 채점 + 3차원 진단 리포트 | `"문제 만들어"` `"이해도 확인"` `"시험 문제"` |
-| | 사용 예: `/tiered-test-generator React hooks 검증 문제 생성` | |
+- 모든 주장은 인용 가능한 출처에 추적 가능해야 함 — 아니면 `Unverified` 표시
+- 소스 등급: S(학술/스펙), A(공식 문서), B(커뮤니티 — 경고 표시), C(일반)
+- 교차 검증: 핵심 주장은 2개 이상 *독립* 출처 필요
+- 적응적 깊이: 좁은 질문 2-3쿼리, 넓은 조사 8+쿼리
+
+### creativity-sampler
+
+고착 편향 방어. 확률 가중치 옵션 생성기.
+
+- 기본 5개 옵션, 각각 전형성 존 배정 (Conventional → Wild card)
+- 최소 1개는 비관습적/와일드카드 존에서 — AI가 평소 억제하는 아이디어
+- **Hidden Assumptions** 섹션: "뻔한" 답이 뻔해 보이는 이유를 명시적으로 해부
+- 제약 조건 기반 의사결정 매트릭스 + 사용자가 놓친 1개 숨겨진 기준
+
+### adversarial-review
+
+확증 편향 방어. 구조화된 악마의 변호인.
+
+- **Steel-man 우선**: 공격 전에 현재 접근법의 최강 정당화를 먼저 명시
+- **3개 독립 벡터**: 논리적 건전성 / 엣지 케이스 공격 / 구조적 무결성
+- 심각도 분류: Critical / Major / Minor / Note
+- Critical/Major는 반드시 트레이드오프 분석 포함 대안 제시
+- 명시적 판정 기준: 완화 불가 Critical = FAIL
+
+### reasoning-tracer
+
+블랙박스 방어. AI 추론을 투명하게.
+
+- **가정 목록**: 모든 가정 번호 매기기, 중요도/검증가능성 평가
+- **결정 트리**: 각 분기에서 어떤 대안을 고려했고 왜 기각했는지
+- **신뢰도 분해**: 전체 신뢰도를 하위 구성요소로 분해 + 근거
+- **최약점**: 하나의 가정이 틀리면 결론이 가장 크게 바뀌는 지점
+- **대안 결론**: "만약 [최약 가정]이 틀리면, 결론은 [X]로 바뀐다"
+
+### pre-mortem
+
+낙관 편향 방어. 전향적 실패 분석.
+
+- "6개월 후, 이 계획은 완전히 실패했다. 무엇이 잘못됐는가?"
+- 5개 카테고리별 실패 시나리오: 기술/조직/외부/시간/가정
+- 가능성 x 영향도 매트릭스 → 상위 3개 집중 분석
+- **선행 지표**: 각 상위 리스크의 측정 가능한 조기 경보 신호
+- **회로 차단기**: 멈추고 방향을 바꿔야 할 구체적 트리거 조건
 
 ---
 
 ## 어떤 스킬을 써야 할까?
 
-| 상황 | 추천 스킬 | 이유 |
-|:-----|:---------|:-----|
-| 기술을 조사하거나 사실 주장을 검증할 때 | `cross-verified-research` | 다중 소스 검증으로 환각 방지 |
-| 여러 옵션 중 선택해야 할 때 (DB, 프레임워크, 아키텍처) | `creativity-sampler` | 비관습적 대안 포함 5개 옵션 강제 생성 |
-| 이미 결정을 내렸고, 스트레스 테스트하고 싶을 때 | `adversarial-review` | 3벡터 공격으로 사각지대 발견 |
-| 복잡한 시스템을 깊이 이해해야 할 때 | `deep-dive-analyzer` | 레이어별 철저한 분석 |
-| 여러 스킬을 파이프라인으로 조합하고 싶을 때 | `skill-composer` | 복잡한 워크플로우를 위한 스킬 체이닝 |
-| 특정 도메인의 전문 AI 페르소나가 필요할 때 | `persona-architect` | 맥락 인식 전문가 페르소나 생성 |
-| 팀 지식을 검증하거나 학습 자료를 만들 때 | `tiered-test-generator` | 다단계 난이도 평가 생성 |
+| 상황 | 스킬 | 이유 |
+|:-----|:-----|:-----|
+| 기술 조사 또는 사실 검증 | `cross-verified-research` | 출처 기반 검증으로 환각 방지 |
+| 옵션 선택 (DB, 프레임워크, 아키텍처) | `creativity-sampler` | 고착 탈피, 비관습적 대안 발굴 |
+| 결정을 내렸고, 스트레스 테스트 필요 | `adversarial-review` | 구조적 적대 분석으로 진짜 결함 발견 |
+| AI의 추천 근거를 알고 싶을 때 | `reasoning-tracer` | 가정과 추론 체인을 감사 가능하게 |
+| 프로젝트 착수 전 리스크 분석 | `pre-mortem` | 실패 모드를 미리 식별 |
 
 ### 추천 체인
+
 - **기술 의사결정**: `creativity-sampler` → `cross-verified-research` → `adversarial-review`
-- **아키텍처 리뷰**: `deep-dive-analyzer` → `adversarial-review`
-- **리서치 보고서**: `cross-verified-research` → `deep-dive-analyzer`
+- **아키텍처 리뷰**: `reasoning-tracer` → `adversarial-review`
+- **프로젝트 킥오프**: `pre-mortem` → `creativity-sampler` (완화책용)
+- **풀 리거**: `creativity-sampler` → `cross-verified-research` → `adversarial-review` → `pre-mortem`
 
 ---
 
-## 스킬 관계도
+## 작동 구조
 
 ```
-                        skill-composer
-                    (모든 스킬을 파이프라인으로)
-                             |
-         +-------------------+-------------------+
-         |                   |                   |
-   cross-verified      creativity          persona
-     -research          -sampler           -architect
-   "사실을 검증한다"    "선택지를 연다"     "목소리를 만든다"
-         |                   |
-         v                   v
-    deep-dive          adversarial
-    -analyzer            -review
-   "깊이 이해한다"      "결함을 찾는다"
-         |
-         v
-    tiered-test
-    -generator
-   "이해를 검증한다"
+AI의 기본 추론:
+
+  [질문] ──→ [첫 번째 그럴듯한 답] ──→ [그대로 사용]
+
+
+Stack Skills 적용 시:
+
+  [질문]
+       │
+       ├──→ creativity-sampler ──→ "선택지가 전부 뭐야?"  (고착 방어)
+       │
+       ├──→ cross-verified-research ──→ "이거 진짜야?"  (환각 차단)
+       │
+       ├──→ reasoning-tracer ──→ "왜 이걸 믿어?"  (가정 노출)
+       │
+       ├──→ adversarial-review ──→ "뭐가 잘못됐어?"  (확증 편향 제거)
+       │
+       └──→ pre-mortem ──→ "어떻게 실패해?"  (낙관 편향 방어)
 ```
+
+각 방화벽은 독립적 — 하나만 쓰거나, 체이닝 가능.
 
 ---
 
 ## 벤치마크: 기본 응답 vs Stack Skills
 
-Claude Opus를 사용한 비공식 내부 비교입니다. 점수는 저자의 주관적 품질 평가(1-10)이며, 독립적으로 검증되지 않았습니다. 개선의 *유형*을 보여주기 위한 것이지 과학적 주장이 아닙니다. 결과는 작업과 모델에 따라 달라집니다.
+Claude Opus 기준 비공식 비교. 저자의 주관적 평가(1-10). 개선의 유형을 보여주기 위한 것이며, 결과는 달라질 수 있습니다.
 
-### 결과
-
-| 시나리오 | 기본 | Stack Skills | 향상 |
+| 시나리오 | 기본 | Stack Skills | 변화 |
 |:---------|:----:|:-----------:|:----:|
 | 리서치: "SQLite가 1000 동시 유저에 적합한가?" | 5/10 | 9/10 | **+80%** |
 | 의사결정: "React 이커머스 상태관리 선택?" | 5/10 | 9/10 | **+80%** |
-| 아키텍처 리뷰: "단일 PostgreSQL로 OLTP+분석?" | 4/10 | 8/10 | **+100%** |
-| **평균** | **4.7** | **8.7** | **+85%** |
+| 리뷰: "단일 PostgreSQL로 OLTP+분석?" | 4/10 | 8/10 | **+100%** |
 
-### 무엇이 달라졌는가?
+**무엇이 달라졌나:**
+- **리서치**: 기본은 "PostgreSQL 쓰세요." cross-verified-research 적용 시, 1000 동시 유저 = ~30 동시 쓰기 = SQLite 120배 여유 발견. 인용된 벤치마크 기반 완전히 다른 결론.
+- **의사결정**: 기본은 "Zustand 추천." creativity-sampler 적용 시, 장바구니를 *어디에* 저장하느냐가 *어떤* 라이브러리를 쓰느냐보다 중요하다는 상위 질문 발견.
+- **리뷰**: 기본은 4개 일반론. adversarial-review 적용 시, 멀티테넌트 분석 쿼리의 데이터 유출 Critical 보안 이슈 발견 + RLS SQL 제공.
 
-| 차원 | Stack Skills 없이 | Stack Skills 사용 |
-|:-----|:-------------------|:------------------|
-| 인용 소스 수 | 0개 | 10개 (공식 문서 포함) |
-| 탐색한 옵션 수 | 1-3개 (안전한 디폴트) | 5개 (비관습적 대안 포함) |
-| 발견한 이슈 수 | 4개 (표면적) | 12개 (Critical 4건) |
-| 노출한 숨겨진 가정 | 0개 | 5개 이상 |
-| 실행 가능성 | "X 쓰세요" | SQL 설정, 타임라인, 트레이드오프 |
-
-### 핵심 발견
-
-> **참고**: 이 벤치마크는 저자의 평가를 반영합니다. 커뮤니티 벤치마크를 환영합니다 — 본인의 before/after 비교를 이슈로 공유해주세요.
-
-- **리서치**: 기본 응답은 "PostgreSQL 쓰세요." Stack Skills는 1000 동시 유저 = ~30 동시 쓰기 = **SQLite의 120배 여유**라는 정량적 인사이트 발견. 완전히 다른 결론.
-- **의사결정**: 기본 응답은 "Zustand 추천." Stack Skills는 **장바구니 저장 위치(서버 vs 클라이언트)가 라이브러리 선택보다 중요**하다는 상위 질문 발견.
-- **리뷰**: 기본 응답은 4개 일반론 나열. Stack Skills는 **멀티테넌트 분석 쿼리의 데이터 유출** Critical 보안 이슈 발견 + RLS SQL 제공.
-
-> 기본 응답은 **답을 준다**. Stack Skills는 **더 나은 질문을 발견하게 한다.**
+> 커뮤니티 벤치마크를 환영합니다 — 본인의 before/after 비교를 이슈로 공유해주세요.
 
 ---
 
 ## 설치
 
-### Plugin Marketplace (권장)
+### 빠른 설치 (npx)
 
 ```bash
-/plugin marketplace add whynowlab/stack-skills
-/plugin install stack-skills@whynowlab/stack-skills
+npx skills add whynowlab/stack-skills --all
+```
+
+### 개별 설치
+
+```bash
+npx skills add whynowlab/stack-skills/cross-verified-research
+npx skills add whynowlab/stack-skills/adversarial-review
+npx skills add whynowlab/stack-skills/creativity-sampler
+npx skills add whynowlab/stack-skills/reasoning-tracer
+npx skills add whynowlab/stack-skills/pre-mortem
 ```
 
 ### 수동 설치
@@ -175,6 +191,21 @@ cp -r stack-skills/skills/* ~/.claude/skills/
 
 ---
 
+## 호환성
+
+| 플랫폼 | 상태 |
+|:--------|:-----|
+| Claude Code | 완전 지원 |
+| Cursor | 호환 (Agent Skills 표준) |
+| GitHub Copilot | 호환 (Agent Skills 표준) |
+| Codex CLI | 호환 (Agent Skills 표준) |
+
 ---
 
-**Stack Skills** by [@thestack_ai](https://github.com/whynowlab) — AI의 사고력을 쌓아올리다.
+## 라이선스
+
+MIT License. [LICENSE](LICENSE) 참조.
+
+---
+
+**Stack Skills** by [@thestack_ai](https://github.com/whynowlab) — AI를 위한 5개 인지 방화벽.
