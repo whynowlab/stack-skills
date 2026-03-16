@@ -4,9 +4,9 @@
   <a href="README.md">English</a> · <a href="README.ko.md">한국어 (Korean)</a>
 </p>
 
-**Catch satisficing decisions before they ship.**
+**Your AI is not swinging at all.**
 
-Your AI picks the safe default, agrees when it should push back, cites no sources, hides its reasoning, and assumes everything will work. These are six distinct cognitive failures. Swing installs a firewall against each one.
+It picks the safe default, agrees when it should push back, cites no sources, hides its reasoning, and assumes everything will work. Six cognitive failures. Six firewalls. Make it swing.
 
 ```
 npx skills add whynowlab/swing-skills --all

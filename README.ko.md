@@ -4,9 +4,9 @@
   <a href="README.md">English</a> · <a href="README.ko.md">한국어 (Korean)</a>
 </p>
 
-**안일한 결정이 나가기 전에 잡아내세요.**
+**너의 AI는 전혀 swing 하고 있지 않아.**
 
-AI는 안전한 기본값을 고르고, 반박 대신 동의하고, 출처를 밝히지 않고, 추론을 숨기고, 모든 게 잘 될 거라 가정합니다. 이것은 여섯 가지 인지 실패입니다. Swing는 각각에 방화벽을 설치합니다.
+안전한 기본값만 고르고, 반박 대신 동의하고, 출처를 밝히지 않고, 추론을 숨기고, 모든 게 잘 될 거라 가정한다. 여섯 가지 인지 실패. 여섯 개의 방화벽. Make it swing.
 
 ```
 npx skills add whynowlab/swing-skills --all
