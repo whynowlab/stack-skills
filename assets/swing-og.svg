@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#0d1117"/>
+  <defs>
+    <linearGradient id="og" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#58a6ff"/>
+      <stop offset="100%" stop-color="#3fb950"/>
+    </linearGradient>
+  </defs>
+  <!-- S-Wave icon left side -->
+  <g transform="translate(200, 115)">
+    <path d="M280 120 C280 48, 120 48, 120 160 C120 280, 280 200, 280 288 C280 380, 120 380, 120 312" stroke="url(#og)" stroke-width="40" stroke-linecap="round"/>
+  </g>
+  <!-- Text right side -->
+  <text x="620" y="260" font-family="'Space Grotesk', -apple-system, sans-serif" font-weight="700" font-size="72" fill="#ffffff">Swing</text>
+  <text x="620" y="330" font-family="'Inter', -apple-system, sans-serif" font-weight="400" font-size="28" fill="#8b949e">Your AI is not swinging at all.</text>
+  <text x="620" y="420" font-family="'Fira Code', monospace" font-weight="400" font-size="22" fill="#58a6ff">6 cognitive firewalls for your AI</text>
+</svg>
