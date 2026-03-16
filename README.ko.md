@@ -4,6 +4,14 @@
 
 <h1 align="center">Swing</h1>
 
+<p align="center">
+  <a href="https://github.com/whynowlab/swing-skills/stargazers"><img src="https://img.shields.io/github/stars/whynowlab/swing-skills?style=flat&color=58a6ff" alt="Stars"></a>
+  <a href="https://github.com/whynowlab/swing-skills/releases"><img src="https://img.shields.io/github/v/tag/whynowlab/swing-skills?label=version&color=3fb950" alt="Version"></a>
+  <a href="https://github.com/whynowlab/swing-skills/blob/main/LICENSE"><img src="https://img.shields.io/github/license/whynowlab/swing-skills?color=8b949e" alt="License"></a>
+  <a href="https://github.com/whynowlab/swing-skills/commits/main"><img src="https://img.shields.io/github/commit-activity/m/whynowlab/swing-skills?color=58a6ff" alt="Commits"></a>
+  <a href="https://x.com/thestack_ai"><img src="https://img.shields.io/badge/follow-@thestack__ai-1DA1F2?logo=x&logoColor=white" alt="Twitter"></a>
+</p>
+
 <p align="right">
   <a href="README.md">English</a> · <a href="README.ko.md">한국어 (Korean)</a>
 </p>
