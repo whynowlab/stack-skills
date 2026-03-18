@@ -1,0 +1,29 @@
+{
+  "name": "swing-skills",
+  "version": "3.1.0",
+  "description": "6 cognitive firewalls for AI coding agents. Defends against premature closure, hallucination, anchoring bias, confirmation bias, black-box reasoning, and optimism bias.",
+  "keywords": [
+    "ai",
+    "agent-skills",
+    "claude-code",
+    "codex",
+    "cursor",
+    "copilot",
+    "skills",
+    "cognitive-firewall",
+    "swing"
+  ],
+  "author": "thestack_ai",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/whynowlab/swing-skills.git"
+  },
+  "homepage": "https://github.com/whynowlab/swing-skills",
+  "files": [
+    "skills/**/*",
+    "marketplace.json",
+    "LICENSE",
+    "README.md"
+  ]
+}
