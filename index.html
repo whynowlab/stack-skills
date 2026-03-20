@@ -105,7 +105,7 @@
         "name": "How do I install Swing?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Run npx skills add swing-skills --all to install all 6 cognitive firewalls. Works with Claude Code, Cursor, and Copilot."
+          "text": "Run npx skills add whynowlab/swing-skills --all to install all 6 cognitive firewalls. Works with Claude Code, Cursor, and Copilot."
         }
       }
     ]
@@ -115,7 +115,7 @@
     "@type": "HowTo",
     "name": "How to install Swing cognitive firewalls",
     "step": [
-      {"@type": "HowToStep", "name": "Install all skills", "text": "Run: npx skills add swing-skills --all"},
+      {"@type": "HowToStep", "name": "Install all skills", "text": "Run: npx skills add whynowlab/swing-skills --all"},
       {"@type": "HowToStep", "name": "Use a skill", "text": "Type /swing-research followed by your question to activate source-verified research"}
     ]
   }
@@ -791,7 +791,7 @@
                 <div class="typing-container" id="typing-text" aria-live="polite"><span class="cursor"></span></div>
                 <p class="subcopy">Six cognitive failures. Six firewalls. Make it swing.</p>
                 <div class="cta-box">
-                    <code id="install-cmd">npx skills add swing-skills --all</code>
+                    <code id="install-cmd">npx skills add whynowlab/swing-skills --all</code>
                     <button class="btn-copy" onclick="copyText('install-cmd', this)" aria-label="Copy installation command">Copy</button>
                 </div>
             </div>
@@ -1044,14 +1044,14 @@
                 <div class="install-item">
                     <h4>Quick (All Skills)</h4>
                     <div class="install-block">
-                        <code id="cmd-quick">npx skills add swing-skills --all</code>
+                        <code id="cmd-quick">npx skills add whynowlab/swing-skills --all</code>
                         <button class="btn-copy" onclick="copyText('cmd-quick', this)">Copy</button>
                     </div>
                 </div>
                 <div class="install-item">
                     <h4>Individual Skill</h4>
                     <div class="install-block">
-                        <code id="cmd-indiv">npx skills add swing-skills/swing-review</code>
+                        <code id="cmd-indiv">npx skills add whynowlab/swing-skills@swing-review</code>
                         <button class="btn-copy" onclick="copyText('cmd-indiv', this)">Copy</button>
                     </div>
                 </div>
@@ -1238,7 +1238,7 @@
 
         const terminalLines = [
             // Phase 1: Install command (typed char by char)
-            { type: 'cmd', text: '$ npx skills add swing-skills --all', delay: 50 },
+            { type: 'cmd', text: '$ npx skills add whynowlab/swing-skills --all', delay: 50 },
             // Phase 2: blank line
             { type: 'blank', text: '', delay: 300 },
             // Phase 3: ASCII art (line by line)
